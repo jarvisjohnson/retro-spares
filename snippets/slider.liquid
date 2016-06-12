@@ -1,0 +1,57 @@
+<!-- /snippets/slider.liquid -->
+{% comment %}
+
+Shows hero Slider on homepage
+
+{% endcomment %}
+
+<section id="HomepageSlideshow" class="homepage--slideshow">
+    <div data-slick='{"slidesToShow": 1, "slidesToScroll": 1}' class="slides">
+        {% if settings.homepage_slide_show_1 %}
+            <div data-id="1">
+                <img src="{{ 'homepage_slide_image_1.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_1 }}"/>
+                <a href="{{ settings.homepage_slide_title_1 }}" class="vac">
+                    <h1>{{ settings.homepage_slide_title_1 }}</h1>
+                    <h2>{{ settings.homepage_slide_text_1 }}</h2>
+                </a>
+            </div>
+        {% endif %}
+        {% if settings.homepage_slide_show_2 %}
+            <div data-id="2">
+                <img src="{{ 'homepage_slide_image_2.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_2 }}"/>
+                <a href="{{ settings.homepage_slide_title_2 }}" class="vac">
+                    <h1>{{ settings.homepage_slide_title_2 }}</h1>
+                    <h2>{{ settings.homepage_slide_text_2 }}</h2>
+                </a>
+            </div>
+        {% endif %}
+        {% if settings.homepage_slide_show_3 %}
+            <div data-id="3">
+                <img src="{{ 'homepage_slide_image_3.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_3 }}"/>
+                <a href="{{ settings.homepage_slide_title_3 }}" class="vac">
+                    <h1>{{ settings.homepage_slide_title_3 }}</h1>
+                    <h2>{{ settings.homepage_slide_text_3 }}</h2>
+                </a>
+            </div>
+        {% endif %}
+        {% if settings.homepage_slide_show_4 %}
+            <div data-id="4">
+                <img src="{{ 'homepage_slide_image_4.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_4 }}"/>
+                <a href="{{ settings.homepage_slide_title_4 }}" class="vac">
+                    <h1>{{ settings.homepage_slide_title_4 }}</h1>
+                    <h2>{{ settings.homepage_slide_text_4 }}</h2>
+                </a>
+            </div>
+        {% endif %}
+        {% if settings.homepage_slide_show_5 %}
+            <div data-id="5">
+                <img src="{{ 'homepage_slide_image_5.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_5 }}"/>
+                <a href="{{ settings.homepage_slide_title_5 }}" class="vac">
+                    <h1>{{ settings.homepage_slide_title_5 }}</h1>
+                    <h2>{{ settings.homepage_slide_text_5 }}</h2>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section><!-- #HomepageSlideshow -->
+

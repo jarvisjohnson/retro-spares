@@ -49,6 +49,18 @@
         "default": "#e5e5e5"
       },
       {
+        "type": "color",
+        "id": "color_menu_main",
+        "label": "Main Menu Background",
+        "default": "#f5f5f5"
+      },
+      {
+        "type": "color",
+        "id": "color_menu_icons",
+        "label": "Menu icons",
+        "default": "#FF8006"
+      },
+      {
         "type": "header",
         "content": "Body"
       },
@@ -58,11 +70,29 @@
         "label": "Background",
         "default": "#ffffff"
       },
+      {  "type": "color",
+        "id": "color_item_fg",
+        "label": "Foreground",
+        "default": "#f9f9f9",
+        "info": "Foreground for items/cards and side menu."
+      },
       {
         "type": "color",
         "id": "color_body_text",
         "label": "Text",
         "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_main_title_text",
+        "label": "Main Title Text",
+        "default": "#0094DA"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary_title_text",
+        "label": "Secondary Title Text",
+        "default": "#000000"
       },
       {
         "type": "header",
@@ -199,6 +229,396 @@
         "id": "social_facebook_link",
         "label": "Facebook URL",
         "info": "https:\/\/www.facebook.com\/shopify"
+      }
+    ]
+  },
+  {
+    "name": "Slideshow",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "homepage_slideshow",
+        "label": "Display slideshow"
+      },
+      {
+        "type": "header",
+        "content": "Slide 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_show_1",
+        "label": "Enable?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_slide_image_1.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_slide_1_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_title_1",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_text_1",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_link_1",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "Slide 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_show_2",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_slide_image_2.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_slide_2_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_title_2",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_text_2",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_link_2",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "Slide 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_show_3",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_slide_image_3.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_slide_3_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_title_3",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_text_3",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_link_3",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "Slide 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_show_4",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_slide_image_4.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_slide_4_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_title_4",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_text_4",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_link_4",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "Slide 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_slide_show_5",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_slide_image_5.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_slide_5_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_title_5",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_text_5",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_slide_link_5",
+        "label": "Call to action URL"
+      }
+    ]
+  },
+  {
+    "name": "Featured Brands Carousel",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel",
+        "label": "Display Carousel"
+      },
+      {
+        "type": "header",
+        "content": "carousel 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_1",
+        "label": "Enable?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_1.jpg",
+        "label": "carousel image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_1_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_title_1",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_text_1",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_1",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "carousel 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_2",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_2.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_2_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_title_2",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_text_2",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_2",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "carousel 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_3",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_3.jpg",
+        "label": "carousel image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_3_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_title_3",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_text_3",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_3",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "carousel 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_4",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_4.jpg",
+        "label": "carousel image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_4_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_title_4",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_text_4",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_4",
+        "label": "Call to action URL"
+      },
+      {
+        "type": "header",
+        "content": "carousel 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_5",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_5.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_5_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_title_5",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_text_5",
+        "label": "Call to action text"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_5",
+        "label": "Call to action URL"
       }
     ]
   }

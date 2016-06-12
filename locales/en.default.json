@@ -13,8 +13,8 @@
       "home_link_title": "Back to the frontpage"
     },
     "newsletter_form": {
-      "newsletter_email": "email@example.com",
-      "submit": "Subscribe",
+      "newsletter_email": "your@email.com",
+      "submit": "Sign Up",
       "confirmation": "Thanks for subscribing"
     },
     "search": {
@@ -221,7 +221,7 @@
     "sections": {
       "frontpage_title": "Frontpage Collection",
       "featured_title": "Featured Collections",
-      "news_title": "Latest News"
+      "news_title": "Brands We Stock"
     },
     "onboarding": {
       "modal_title": "Almost there...",
@@ -256,8 +256,10 @@
       "create_account": "Create account"
     },
     "footer": {
-      "social_title": "Get Connected",
+      "social_title": "Follow us",
       "newsletter_title": "Newsletter",
+      "first-menu-title": "Information",
+      "second-menu-title": "Why buy from us",
       "accepted_payments": "Accepted Payments"
     }
   },

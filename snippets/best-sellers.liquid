@@ -1,0 +1,27 @@
+<!-- /snippets/best-sellers.liquid -->
+{% comment %}
+
+Shows 'best sellers' section in sidebar on all pages, below collections menu
+
+{% endcomment %}
+
+BEST SELLERS
+
+{% assign image_size = 'large' %}
+
+{% if linklists.best-sellers.links.size > 0 %}
+
+    <div class="grid-uniform">
+
+        {% for link in linklists.best-sellers.links %}
+
+            {% assign product = link.object %}
+
+                    {% assign grid_item_width = 'large--one-whole' %}
+                    {% include 'product-grid-item-menu' %}
+
+        {% endfor %}
+
+    </div>
+
+{% endif %}
