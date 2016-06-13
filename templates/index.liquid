@@ -18,7 +18,7 @@ Use class grid-uniform to have evenly sized columns clear
 each other properly at each breakpoint.
 {% endcomment %}
 
-<div class="grid-uniform">
+<div class="grid-uniform flex wrap">
 
   {% comment %}
     Show ten collections, unless it's 'frontpage'.
@@ -32,47 +32,49 @@ each other properly at each breakpoint.
   {% assign index = 1 %}
   {% assign isEmpty = true %}
 
-  {% for collection in collections limit:11 %}
-    {% unless index > 10 %}
+  {% for link in linklists.featured-collections.links %}
+    {% assign collection = link.object %}
 
-      {% unless collection.handle == 'frontpage' %}
         {% assign isEmpty = false %}
         {% assign collection_item_width = 'large--one-half small--one-whole' %}
-        <div class="grid__item {{ collection_item_width }} text-left">
-          <div class="grid-uniform">
-            {% comment %}
-              Use capture to put the collection title in a variable that is used in liquid filters
-            {% endcomment %}
-            {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+        <div class="grid__item {{ collection_item_width }} text-left flex wrap half-pad">
+            <div class="grey card flex wrap">
+              <div class="grid-uniform">
+                {% comment %}
+                  Use capture to put the collection title in a variable that is used in liquid filters
+                {% endcomment %}
+                {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
-            <div class="grid__item {{ collection_item_width }} text-left">
-              <H1>
-                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
-              </H1>
-              <a href="{{ product.url | within: collection }}">
-                <span class="input-group-btn">
-                    <div class="btn btn--large arrow-after">SHOP NOW &nbsp; &nbsp;</div>
-                </span>
-              </a>
+                <div class="grid__item {{ collection_item_width }} text-left higher">
+                  <H2 class="upper">
+                    <a  class="word_split" href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
+                  </H2>
+                  <p>
+                    {{ collection.description | strip_html | truncatewords: 8 }}
+                  </p>
+                  <a href="{{ product.url | within: collection }}">
+                    <span class="input-group-btn">
+                        <div class="btn btn--large arrow-after">SHOP NOW &nbsp; &nbsp;</div>
+                    </span>
+                  </a>
 
+                </div>
+
+                <div class="grid__item {{ collection_item_width }} text-left">
+                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
+                    {% if collection.image %}
+                      {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
+                    {% else %}
+                      {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
+                    {% endif %}
+                  </a>
+                </div>
+
+              </div>
             </div>
-
-            <div class="grid__item {{ collection_item_width }} text-left">
-              <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
-                {% if collection.image %}
-                  {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
-                {% else %}
-                  {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
-                {% endif %}
-              </a>
-            </div>
-
-          </div>
         </div>
         {% assign index = index | plus: 1 %}
-      {% endunless %}
 
-    {% endunless %}
   {% endfor %}
 
   {% comment %}

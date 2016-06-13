@@ -5,13 +5,17 @@ Shows 'best sellers' section in sidebar on all pages, below collections menu
 
 {% endcomment %}
 
-BEST SELLERS
+<h2>
+    <span class="word2">
+        BEST SELLERS
+    </span>
+</h2>
 
 {% assign image_size = 'large' %}
 
 {% if linklists.best-sellers.links.size > 0 %}
 
-    <div class="grid-uniform">
+    <div>
 
         {% for link in linklists.best-sellers.links %}
 

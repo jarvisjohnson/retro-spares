@@ -45,6 +45,7 @@
 
   {% if template == 'index' %}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js' | script_tag }}
+    {{ '//cdn.jsdelivr.net/lettering/0.7.0/jquery.lettering.min.js' | script_tag }}
   {% endif %}
 
   {% comment %}
@@ -168,7 +169,7 @@
                   - http://docs.shopify.com/themes/liquid-variables/linklists
                   {% endcomment %}
                   <!-- begin site-nav -->
-                  <ul class="site-nav orange    " id="AccessibleNav">
+                  <ul class="site-nav orange" id="AccessibleNav">
                       {% for link in linklists.main-menu.links %}
                           {% comment %}
                           Create a dropdown menu by naming a linklist the same as a link in the parent nav
@@ -226,7 +227,7 @@
               If customer accounts are enabled, provide login and create account links
               {% endcomment %}
               {% if shop.customer_accounts_enabled %}
-                  <div style="display: inline-block;">
+                  <div class="login__main medium-down--hide">
                       {% if customer %}
                           {% if customer.first_name != blank %}
                               {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
@@ -305,7 +306,7 @@
 
     <main class="wrapper main-content" role="main">
       <div class="grid">
-        <div class="grid__item large--one-quarter medium--one-half">
+        <div class="grid__item large--one-quarter medium--one-half collection-nav">
           {% include 'collections-menu' %}
           {% include 'best-sellers' %}
         </div>
@@ -326,8 +327,8 @@
     <!-- begin site-footer -->
     <footer class="site-footer small--text-center" role="contentinfo">
       <div class="wrapper">
-        <div class="grid">
-            <div class="grid__item large--one-quarter medium--one-half">
+        <div class="grid flex">
+            <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
                 <h3>{{ 'layout.footer.first-menu-title' | t }}</h3>
                 {% comment %}
                 List out your footer-menu linklist (default)
@@ -368,7 +369,7 @@
                 </ul>
                 <!-- //site-nav -->
             </div>
-            <div class="grid__item large--one-quarter medium--one-half">
+            <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
                 <h3>{{ 'layout.footer.second-menu-title' | t }}</h3>
                 {% comment %}
                 List out your footer-menu linklist (default)
@@ -408,7 +409,7 @@
                     {% endfor %}
             </div>
           {% if settings.footer_social_enable %}
-              <div class="grid__item large--one-quarter medium--one-half">
+              <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
               <h3>{{ 'layout.footer.social_title' | t }}</h3>
                 <ul class="inline-list social-icons orange">
                   {% if settings.social_twitter_link != blank %}
@@ -429,7 +430,7 @@
             </div>
           {% endif %}
           {% if settings.footer_newsletter_enable %}
-            <div class="grid__item large--one-quarter medium--one-half">
+            <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
               {% comment %}
                 MailChimp is the go-to newsletter service for Shopify.
                 Use the link below to find your MailChimp form action
@@ -446,7 +447,7 @@
                 <form action="{{ settings.newsletter_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="input-group">
                   <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" id="mail" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
                   <span class="input-group-btn">
-                    <input type="submit" class="btn" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+                    <input type="submit" class="btn btn__dark" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
                   </span>
                 </form>
               {% else %}
@@ -459,7 +460,7 @@
                       <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
                       <input type="hidden" name="contact[tags]" value="newsletter">
                       <span class="input-group-btn">
-                        <input type="submit" class="btn" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+                        <input type="submit" class="btn btn__dark" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
                       </span>
                     </div>
                   {% endif %}
@@ -551,9 +552,12 @@
       $('.slides, .carousel').slick({
         dots: true,
         speed: 500,
-          nextArrow: '<i class="fa fa-arrow-right"></i>',
-          prevArrow: '<i class="fa fa-arrow-left"></i>'
+          nextArrow: '<div class="directionNav"><a class="nextNav"><i class="fa fa-chevron-right"></i><span></span></a></div>',
+          prevArrow: '<div class="directionNav"><a class="prevNav"><i class="fa fa-chevron-left"></i><span></span></a></div>'
       });
+    });
+    $(document).ready(function() {
+        jQuery(".word_split").lettering('words');
     });
   </script>
   {% endif %}
