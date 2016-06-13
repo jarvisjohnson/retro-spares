@@ -49,10 +49,12 @@ each other properly at each breakpoint.
               <H1>
                 <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
               </H1>
-              <button type="button" class="button--details">
-                Details
-                <span class="icon icon-arrow-down" aria-hidden="true"></span>
-              </button>
+              <a href="{{ product.url | within: collection }}">
+                <span class="input-group-btn">
+                    <div class="btn btn--large arrow-after">SHOP NOW &nbsp; &nbsp;</div>
+                </span>
+              </a>
+
             </div>
 
             <div class="grid__item {{ collection_item_width }} text-left">

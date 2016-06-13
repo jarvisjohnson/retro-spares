@@ -9,7 +9,7 @@
   List of the Collections
 {% endcomment %}
 
-<ul>
+<ul class="grey">
 
   {% for link in linklists.side-menu-collections.links %}
       {% assign collection = link.object %}
@@ -17,7 +17,7 @@
     {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
         <li>
-            <a href="{{ collection.url }}" title="{{ 'collections.link_title' | t: title: collection_title }}">{{ collection_title }} &rsaquo;</a>
+            <a href="{{ collection.url }}" title="{{ 'collections.link_title' | t: title: collection_title }}">{{ collection_title }}</a>
         </li>
 
   {% endfor %}

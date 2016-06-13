@@ -89,10 +89,11 @@
         <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
     </p>
 
-  <button type="button" class="button--details">
-    Details
-    <span class="icon icon-arrow-down" aria-hidden="true"></span>
-  </button>
+    <a href="{{ product.url | within: collection }}">
+        <span class="input-group-btn">
+            <div class="btn btn--small btn--secondary arrow-after">Details &nbsp; &nbsp;</div>
+        </span>
+    </a>
 
 
 </div>

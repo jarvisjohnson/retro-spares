@@ -80,6 +80,7 @@ $breakpoint-has-pull:  ('medium', 'medium-down', 'large');
 // Timber Colors
 $colorPrimary: {{ settings.color_primary }};
 $colorSecondary: {{ settings.color_secondary }};
+$colorTertiary: #393536;
 
 // Button colors
 $colorBtnPrimary: $colorPrimary;
@@ -87,7 +88,7 @@ $colorBtnPrimaryHover: darken($colorBtnPrimary, 10%);
 $colorBtnPrimaryActive: darken($colorBtnPrimaryHover, 10%);
 $colorBtnPrimaryText: #fff;
 
-$colorBtnSecondary: $colorSecondary;
+$colorBtnSecondary: $colorTertiary;
 $colorBtnSecondaryHover: darken($colorBtnSecondary, 10%);
 $colorBtnSecondaryActive: darken($colorBtnSecondaryHover, 10%);
 $colorBtnSecondaryText: #fff;
@@ -96,13 +97,14 @@ $colorBtnSecondaryText: #fff;
 $colorLink: $colorPrimary;
 $colorLinkHover: lighten($colorPrimary, 15%);
 $colorFooterLink: #fff;
-$colorFooterLinkHover: lighten($colorPrimary, 15%);
+$colorFooterLinkHover: {{ settings.color_footer_social_link }};
 
 // Text colors
 $colorTextBody: {{ settings.color_body_text }};
 
 // Backgrounds
 $colorBody: {{ settings.color_body_bg }};
+$colorForeground: {{ settings.color_item_fg }};
 
 // Border colors
 $colorBorder: {{ settings.color_borders }};
@@ -785,6 +787,9 @@ body {
 .no-margin{
   margin: 0;
 }
+.grey{
+  background-color: $colorForeground;
+}
 /*============================================================================
   #Typography
 ==============================================================================*/
@@ -800,6 +805,10 @@ select {
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+}
+
+a{
+  font-weight: 600;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1154,13 +1163,11 @@ html input[disabled] {
 }
 
 .btn--small {
-  padding: 4px 5px;
-  font-size: em(12px);
+  padding: 12px 8px;
 }
 
 .btn--large {
-  padding: 12px 15px;
-  font-size: em(16px);
+  padding: 12px 20px;
 }
 
 .btn--full {
@@ -1193,9 +1200,12 @@ li { margin-bottom: 0.25em; }
 ul.orange, ul.grey {
   list-style: none;
   margin: 0;
+  li a {
+    padding: 1px 0 1px 10px;
+  }
 }
 
-ul.orange li:before, ul.grey li:after{
+ul.orange li:before, ul.grey li:after, .arrow-after:after{
   content: '';
   display: inline-block;
   height: 12px;
@@ -1769,10 +1779,10 @@ label.error {
   }
 
   a {
-    color: {{ settings.color_footer_social_link }};
+    color: $colorFooterLink;
 
     &:hover {
-      color: darken({{ settings.color_footer_social_link }}, 10%);
+      color: $colorFooterLinkHover;
     }
   }
 }
@@ -2563,6 +2573,34 @@ label.error {
   border-right: 1px solid $colorBorder;
 }
 
+/*================ Sliders ================*/
+.slick-dots{
+  background: $colorPrimary;
+  height: 39px;
+}
+.vac{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(60% , 0%);
+}
+.slick-initialized .slick-slide {
+  position: relative;
+}
+.slick-dots {
+  bottom: initial;
+  right: -1px;
+  left: 0;
+  width: initial;
+  min-width:100%;
+}
+.slick-dots li{
+  font-size: 23px;
+}
+.slick-dots li.slick-active button:before {
+  font: normal normal normal 14px/1 FontAwesome;
+  content: "\f10c";
+}
 /*================ Quantity Selectors in Ajax Cart ================*/
 .ajaxcart__qty {
   @extend .js-qty;

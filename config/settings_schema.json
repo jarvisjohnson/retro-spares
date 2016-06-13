@@ -70,7 +70,8 @@
         "label": "Background",
         "default": "#ffffff"
       },
-      {  "type": "color",
+      {
+        "type": "color",
         "id": "color_item_fg",
         "label": "Foreground",
         "default": "#f9f9f9",
@@ -459,18 +460,8 @@
       },
       {
         "type": "text",
-        "id": "homepage_carousel_title_1",
-        "label": "Title"
-      },
-      {
-        "type": "text",
-        "id": "homepage_carousel_text_1",
-        "label": "Call to action text"
-      },
-      {
-        "type": "text",
         "id": "homepage_carousel_link_1",
-        "label": "Call to action URL"
+        "label": "Collection URL"
       },
       {
         "type": "header",
@@ -496,18 +487,8 @@
       },
       {
         "type": "text",
-        "id": "homepage_carousel_title_2",
-        "label": "Title"
-      },
-      {
-        "type": "text",
-        "id": "homepage_carousel_text_2",
-        "label": "Call to action text"
-      },
-      {
-        "type": "text",
         "id": "homepage_carousel_link_2",
-        "label": "Call to action URL"
+        "label": "Collection URL"
       },
       {
         "type": "header",
@@ -533,18 +514,8 @@
       },
       {
         "type": "text",
-        "id": "homepage_carousel_title_3",
-        "label": "Title"
-      },
-      {
-        "type": "text",
-        "id": "homepage_carousel_text_3",
-        "label": "Call to action text"
-      },
-      {
-        "type": "text",
         "id": "homepage_carousel_link_3",
-        "label": "Call to action URL"
+        "label": "Collection URL"
       },
       {
         "type": "header",
@@ -570,18 +541,8 @@
       },
       {
         "type": "text",
-        "id": "homepage_carousel_title_4",
-        "label": "Title"
-      },
-      {
-        "type": "text",
-        "id": "homepage_carousel_text_4",
-        "label": "Call to action text"
-      },
-      {
-        "type": "text",
         "id": "homepage_carousel_link_4",
-        "label": "Call to action URL"
+        "label": "Collection URL"
       },
       {
         "type": "header",
@@ -607,19 +568,90 @@
       },
       {
         "type": "text",
-        "id": "homepage_carousel_title_5",
-        "label": "Title"
-      },
-      {
-        "type": "text",
-        "id": "homepage_carousel_text_5",
-        "label": "Call to action text"
-      },
-      {
-        "type": "text",
         "id": "homepage_carousel_link_5",
-        "label": "Call to action URL"
-      }
+        "label": "Collection URL"
+      },
+      {
+        "type": "header",
+        "content": "carousel 6"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_6",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_6.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_6_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_6",
+        "label": "Collection URL"
+      },
+      {
+        "type": "header",
+        "content": "carousel 7"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_7",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_7.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_7_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_7",
+        "label": "Collection URL"
+      },
+      {
+        "type": "header",
+        "content": "carousel 8"
+      },
+      {
+        "type": "checkbox",
+        "id": "homepage_carousel_8",
+        "label": "Display?",
+        "default": true
+      },
+      {
+        "type": "image",
+        "id": "homepage_carousel_image_8.jpg",
+        "label": "Slide image",
+        "max-width": 5000
+      },
+      {
+        "type": "color",
+        "id": "homepage_carousel_8_border",
+        "label": "Menu tint",
+        "default": "#ccc"
+      },
+      {
+        "type": "text",
+        "id": "homepage_carousel_link_8",
+        "label": "Collection URL"
+      },
     ]
   }
 ]
