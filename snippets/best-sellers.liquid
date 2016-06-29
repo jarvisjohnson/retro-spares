@@ -15,8 +15,8 @@ Shows 'best sellers' section in sidebar on all pages, below collections menu
 
 {% if linklists.best-sellers.links.size > 0 %}
 
-    <div>
-
+<!--     <div>
+ -->
         {% for link in linklists.best-sellers.links %}
 
             {% assign product = link.object %}
@@ -26,6 +26,6 @@ Shows 'best sellers' section in sidebar on all pages, below collections menu
 
         {% endfor %}
 
-    </div>
+    <!-- </div> -->
 
 {% endif %}

@@ -75,7 +75,7 @@
         "id": "color_item_fg",
         "label": "Foreground",
         "default": "#f2f2f9",
-        "info": "Foreground for items/cards and side menu."
+        "info": "Foreground for items\/cards and side menu."
       },
       {
         "type": "color",
@@ -183,6 +183,16 @@
         "id": "newsletter_form_action",
         "label": "MailChimp form action URL",
         "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
+      }
+    ]
+  },
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "sort_by_vendor_enable",
+        "label": "Enable Sort By Vendor"
       }
     ]
   },

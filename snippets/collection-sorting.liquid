@@ -1,3 +1,10 @@
+{% if settings.sort_by_vendor_enable %}
+
+  {% include 'vendor-filter' %}
+
+{% endif %}
+
+
 <!-- /snippets/collection-sorting.liquid -->
 <div class="form-horizontal">
   <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
@@ -12,6 +19,7 @@
     <option value="created-ascending">{{ 'collections.sorting.date_ascending' | t }}</option>
   </select>
 </div>
+
 
 {% comment %}
   Toggle between collection.liquid and collection.list.liquid with the
@@ -55,5 +63,13 @@
         location.search = jQuery.param(Shopify.queryParams);
       }
     );
+    $('#SortByVendor')
+      .val('Hello')
+      .bind('change', function() {
+        Shopify.queryParams = vendors;
+        location.search = jQuery.param(Shopify.queryParams);
+      }
+    );      
   });
+
 </script>

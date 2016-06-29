@@ -8,21 +8,50 @@
 {% comment %}
   List of the Collections
 {% endcomment %}
+<nav role="navigation" class="grey sidebar-nav" id="sidebar-nav">
+	<ul class="grey sidebar-links" id="accordion">
 
-<ul class="grey sidebar-links">
+  		{% for link in linklists.side-menu-collections.links %}
+	    {% assign child_list_handle = link.title | handle %}
+	    {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+	    <li class="has-dropdown">
+	    	<a>
+	      {{ link.title }}
+	    	  </a>
+	      <ul class="grey sidebar-links slide-down">
 
-  {% for link in linklists.side-menu-collections.links %}
-      {% assign collection = link.object %}
+	        {% for child_link in linklists[child_list_handle].links %}
+	        {% assign grand_child_list_handle = child_link.title | handle %}
+	        {% if linklists[grand_child_list_handle] and linklists[grand_child_list_handle].links.size > 0 %}
+	        <li class="">
+	          {{ child_link.title | link_to: child_link.url }}
+	          <ul>
+	            {% for grand_child_link in linklists[grand_child_list_handle].links %}
+	            <li>
+	              {{ grand_child_link.title | link_to: grand_child_link.url }}
+	            </li>
+	            {% endfor %}
+	          </ul>
+	        </li>
+	        {% else %}
+	        <li>
+	          {{ child_link.title | link_to: child_link.url }}
+	        </li>
+	        {% endif %}
+	        {% endfor %}
+	       	<li class="all-brand-link">
+	      	 	{{ link.title | link_to: link.url }}
+	      	 </li>        
+	      </ul>
+	    </li>
+	    {% else %}
+	    <li>
+	      {{ link.title | link_to: link.url }}
+	    </li>
+	    {% endif %}
+	    {% endfor %}
 
-    {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
-
-        <li>
-            <a href="{{ collection.url }}" title="{{ 'collections.link_title' | t: title: collection_title }}">{{ collection_title }}</a>
-        </li>
-
-  {% endfor %}
-
-</ul>
-
+	</ul>
+</nav>
 
 

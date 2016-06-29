@@ -30,9 +30,10 @@
   <!-- CSS ================================================== -->
   {% if template == 'index' %}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css' | stylesheet_tag }}
-    {{ '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css' | stylesheet_tag }}
   {% endif %}
+  
+  {{ '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' | stylesheet_tag }}
 
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
 
@@ -54,6 +55,9 @@
   {% if template contains 'customers' %}
     {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% endif %}
+
+  {{ 'magiczoom.css' | asset_url | stylesheet_tag }}
+  {{ 'magiczoom.js' | asset_url | script_tag }}
 
 </head>
 
@@ -160,8 +164,8 @@
   <div id="PageContainer" class="is-moved-by-drawer">
 
       <nav class="nav-bar" role="navigation">
-          <div class="wrapper">
-              <div class="medium-down--hide" style="display: inline-block;">
+          <div class="wrapper" style="display: table;vertical-align: middle;width: 100%;">
+              <div class="medium-down--hide" style="display: table-cell">
                   {% comment %}
                   List out your main-menu linklist (default)
 
@@ -227,20 +231,20 @@
               If customer accounts are enabled, provide login and create account links
               {% endcomment %}
               {% if shop.customer_accounts_enabled %}
-                  <div class="login__main medium-down--hide">
-                      {% if customer %}
-                          {% if customer.first_name != blank %}
-                              {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-                              {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-                          {% else %}
-                              <a href="/account">{{ 'layout.customer.account' | t }}</a>
-                          {% endif %}
-                          | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+              <div class="login__main medium-down--hide" style="display: table-cell;">
+                  {% if customer %}
+                      {% if customer.first_name != blank %}
+                          {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                          {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
                       {% else %}
-                          {{ 'layout.customer.log_in' | t | customer_login_link }}
-                          | {{ 'layout.customer.create_account' | t | customer_register_link }}
+                          <a href="/account">{{ 'layout.customer.account' | t }}</a>
                       {% endif %}
-                  </div>
+                      | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                  {% else %}
+                      {{ 'layout.customer.log_in' | t | customer_login_link }}
+                      | {{ 'layout.customer.create_account' | t | customer_register_link }}
+                  {% endif %}
+              </div>
               {% endif %}
           </div>
       </nav>
@@ -310,7 +314,7 @@
           {% include 'collections-menu' %}
           {% include 'best-sellers' %}
         </div>
-        <div class="grid__item large--three-quarters medium--one-half">
+        <div class="grid__item large--three-quarters medium--one-half main-section">
           {{ content_for_layout }}
         </div>
       </div>
@@ -318,7 +322,25 @@
       <div class="grid">
         <div class="wrapper">
         map 100%
-        <div>
+        </div>
+
+          {% comment %}
+          Use slick slider carousel to loop through the brands we stock
+          {% endcomment %}
+
+          {% if settings.homepage_slideshow %}
+            {% include 'carousel' %}
+          {% endif %}
+
+
+
+        <div class="wrapper">
+          map 100%
+          <div>
+            Retro spares info text here...
+          </div>
+        </div>
+
       </div>
       {% else %}
       {% endif %}
@@ -549,13 +571,24 @@
   {% if template == 'index' %}
   <script type="text/javascript">
     jQuery(document).ready(function(){
-      $('.slides, .carousel').slick({
+      $('.slides').slick({
         dots: true,
         speed: 500,
+        autoplay: true,
+        autoplaySpeed: 3500,
           nextArrow: '<div class="directionNav"><a class="nextNav"><i class="fa fa-chevron-right"></i><span></span></a></div>',
           prevArrow: '<div class="directionNav"><a class="prevNav"><i class="fa fa-chevron-left"></i><span></span></a></div>'
       });
     });
+    jQuery(document).ready(function(){
+      $('.carousel').slick({
+        dots: false,
+        speed: 300,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+      });
+    });    
     $(document).ready(function() {
         jQuery(".word_split").lettering('words');
     });

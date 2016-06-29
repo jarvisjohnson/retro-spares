@@ -111,11 +111,13 @@ $colorForegroundHover: darken($colorForeground, 10%);
 
 // Border colors
 $colorBorder: {{ settings.color_borders }};
+$colorBorderSecondary: #E0E0E0;
+
 
 // Nav and dropdown link background
 $colorNav: #f2f2f2;
-$colorNavText: #333;
-$colorNavTextHover: darken($colorNavText, 10%);
+$colorNavText: #000;
+$colorNavTextHover: lighten($colorNavText, 20%);
 
 // Site Footer
 $colorFooterBg: {{ settings.color_footer_bg }};
@@ -145,11 +147,14 @@ $drawerTransition: all 0.4s cubic-bezier(0.46, 0.01, 0.32, 1);
 $siteWidth: 1180px;
 $gutter: 30px;
 $gridGutter: 30px; // can be a %, but nested grids will have smaller margins because of it
-$radius: 3px;
+$radius: 0px;
 
 // Z-index
 $zindexNavDropdowns: 5;
 $zindexDrawer: 10;
+
+//Transitions
+$transition: all 300ms cubic-bezier(0.57, 0.06, 0.05, 0.95);
 
 /*================ Typography ================*/
 
@@ -739,7 +744,7 @@ body {
 
 .main-content {
   display: block;
-  margin-top: $gutter;
+  margin-top: 0;
   padding-bottom: $gutter * 2;
 }
 
@@ -800,9 +805,11 @@ body {
   background-color: $colorForeground;
 }
 .card{
-  border-bottom: 2px solid $colorBorder;
+  // border-bottom: 2px solid $colorBorder;
   margin-bottom: ($gutter / 2);
-  padding: ($gutter /2) ($gutter);
+  padding: ($gutter /2) ($gutter) ($gutter);
+  position: relative;
+  overflow: hidden;
 }
 .flex{
   display:-webkit-box;
@@ -839,6 +846,11 @@ select {
 
 a{
   font-weight: 600;
+  text-transform: uppercase;
+  transition: $transition;
+  &:after, :before{
+  transition: $transition;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1151,6 +1163,7 @@ html input[disabled] {
   -webkit-appearance: none;
   -moz-appearance: none;
   border-radius: $radius;
+  transition: $transition;
 
   /*================ Set primary button colors - can override later ================*/
   background-color: $colorBtnPrimary;
@@ -1248,26 +1261,6 @@ li { margin-bottom: 0.25em; }
 ul.orange, ul.grey {
   list-style: none;
   margin: 0;
-  li a {
-    padding: 1px 0 1px 10px;
-  }
-}
-
-ul.orange li:before, ul.grey li:after, .arrow-after:after{
-  content: '';
-  display: inline-block;
-  height: 12px;
-  width: 8px;
-  background-image: url('{{ "arrow-right.png" | asset_url }}');
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-ul.grey li:after{
-  background-image: url('{{ "arrow-right-grey.png" | asset_url }}');
-  position: absolute;
-  top: 50%;
-  right: 5%;
-  transform: translate(0, -50%);
 }
 
 ul.square { list-style: square outside; }
@@ -1288,30 +1281,105 @@ ol.alpha { list-style: lower-alpha outside; }
   }
 }
 
+nav *{
+  list-style: none;
+  margin: 0;
+}
+
 /*================ Collections Navigation Items ================*/
+
 .sidebar-links{
   li{
-    border-bottom: 1px solid $colorBorder;
     position: relative;
     margin:0;
     a{
       padding: ($gutter / 2) !important;
       display: inline-block;
       color: $colorNavText;
-    }
-    &:hover{
-      background: $colorForegroundHover;
-      a{
-        color:$colorNavTextHover;
+      width:100%;
+      text-transform: uppercase;
+      line-height: 1em;
+      border-bottom: 2px solid $colorBorder;
+      &:active{
+
       }
     }
   }
 }
+.sidebar-links.grey li a:after{
+  float: right;
+  padding: 0;
+}
 
 .collection-menu-item{
   padding: ($gutter/2) ($gutter*2/3);
-  border: 1px solid $colorBorder;
+}
+
+.product-item__hover{
   margin-bottom: ($gutter/2);
+  border: 1px solid $colorBorderSecondary;
+  a{
+    display: inherit;
+  }
+}
+
+ul.orange li a:before, ul.grey li a:after, .slider-text span:after{
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  content: "\f054";
+  padding: 0 10px 0 0;
+}
+.sidebar-links li a:after{
+  float: right;
+  padding: 5px 0 0 0;
+}
+.slider-text span:after{
+  padding: 0 0 0 10px;
+}
+
+.has-dropdown>a{
+  transition-property: transform;
+  cursor: pointer;
+}
+
+.has-dropdown>a:after{
+  transform: rotate(90deg);
+  // transition: all .3s ease;
+}
+.has-dropdown.open>a:after{
+  transform: rotate(-90deg);
+}
+.slide-down{
+  display:none;
+  li{
+      a{
+        background: $colorForeground;
+        color: #ffffff;
+        text-transform: none;
+        padding: 5px 15px 5px 18px !important;
+        border-bottom: 1px solid #fff;
+        &:hover{
+          color: $colorNavTextHover;
+          }
+        }
+  }
+}
+
+.open .slide-down{
+  li a{ 
+        background: $colorPrimary;
+    }
+}
+.all-brand-link a:before{
+  content: 'All ';
+}
+.has-dropdown.open>a{
+  background: $colorPrimary;
+  color: white;
+  border-bottom-color: white;
 }
 
 /*============================================================================
@@ -1959,8 +2027,8 @@ label.error {
   #Site Nav and Dropdowns
 ==============================================================================*/
 .nav-bar {
-  background-color: $colorNav;
-  padding: ($gutter / 2) 0;
+  border-bottom: $colorNav solid 4px;
+  // padding: ($gutter / 2) 0;
 }
 
 .site-nav {
@@ -1982,6 +2050,9 @@ label.error {
 .login__main {
   float:right;
   display: inline-block;
+  a{
+    padding: $gutter / 2;
+  }
 }
 
 /*================ Home to hamburger and cart that toggle drawers ================*/
@@ -2364,12 +2435,21 @@ footer a:focus {
 /*============================================================================
   #Homepage
 ==============================================================================*/
+.sidebar-nav{
+  padding: ($gutter/2);
+  padding-top: ($gutter); 
+}
+
+.main-section{
+  margin-top: $gutter;
+}
+
 .word_split span:last-of-type, .collection-nav h2 span {
   color: $colorTextBody;
   font-size: 90%;
 }
 .collection-nav h2 span {
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid $colorBorder;
   display: block;
   padding-bottom: ($gutter / 6);
   padding-top: ($gutter);
@@ -2378,6 +2458,20 @@ footer a:focus {
 .word_split span:first-of-type:after{
   content: "\A";
   white-space: pre-line;
+}
+
+.product-hover--btn{
+  position: absolute;
+    bottom: -30px;
+    left: 0;
+}
+.grey.card:hover{
+    .product-hover--btn{
+    bottom: 0px;
+  }
+}
+.grey.card .btn--full{
+  width: calc(100% + ($gutter * 2));
 }
 /*============================================================================
   #Collection Filters
@@ -2689,22 +2783,29 @@ footer a:focus {
 #HomepageSlideshow a.vac{
  color: #ffffff;
 }
+.slick-slide img {
+    margin: 0 auto;
+}
 .slick-dots{
-  background: $colorPrimary;
+  background: transparent;
   height: 39px;
 }
 .vac{
+  position: relative;
+  display: block;
+}
+.slider-text{
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(60% , 0%);
+  text-align: right;
+  right: 0;
+  top: 0;
+  padding: 15px 20px;
 }
 .slick-initialized .slick-slide {
   position: relative;
 }
 .slick-dots {
-  bottom: initial;
-  right: -1px;
+  bottom: 0;
   left: 0;
   width: initial;
   min-width: 100%;
@@ -2721,7 +2822,10 @@ footer a:focus {
 .slick-dots li button:before {
   font: normal normal normal 14px/1 FontAwesome;
   content: "\f10c";
+    opacity: 1;
+    color: white;
 }
+
 .slick-dots li.slick-active button:before {
   color: $colorSecondary;
   opacity: 1;
@@ -2740,14 +2844,12 @@ footer a:focus {
   top: 50%;
   z-index: 9;
   cursor: pointer;
-  background: white;
-  opacity: 0.8;
   i{
     width: 39px;
     height: 74px;
     display: block;
     font-size: 17px;
-    color: #7f7f7f;
+    color: #fff;
     text-align: center;
     line-height: 74px;
     position: absolute;
@@ -2767,7 +2869,7 @@ footer a:focus {
   right: -1px;
 }
 .slick-dotted.slick-slider {
-  margin-bottom: (39px + $gutter);
+  margin-bottom: ($gutter);
 }
 /*================ Quantity Selectors in Ajax Cart ================*/
 .ajaxcart__qty {

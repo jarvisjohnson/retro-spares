@@ -1,0 +1,12 @@
+<!-- /snippets/vendor-filter.liquid -->
+
+<div class="form-horizontal">
+  <label for="SortByVendor">Filter by Vendor</label>
+  <select name="SortByVendor" id="SortByVendor" onchange="window.location = this.options[this.selectedIndex].value;">
+  {% for product_vendor in shop.vendors %}
+  {% capture vendor %} {{ product_vendor | url_for_vendor }} {% endcapture %}
+  <option value="{{ vendor }}">{{ product_vendor | link_to_vendor }}</option>
+  {% endfor %}
+  </select>
+</div>
+

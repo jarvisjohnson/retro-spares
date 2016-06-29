@@ -10,3 +10,9 @@
 - snippets/
 - templates/
 - locales/
+:ignore_files:
+- assets/"*.jpg"
+- assets/"*.jpeg"
+- assets/"*.gif"
+- assets/"*.png"
+- config/settings_data.json

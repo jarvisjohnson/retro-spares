@@ -36,65 +36,74 @@
 {% if product.available %}
   {% assign sold_out = false %}
 {% endif %}
+<div class="product-item__hover">
 
-<div class="grid__item {{ grid_item_width }} collection-menu-item">
+  <div class="grid__item {{ grid_item_width }} collection-menu-item">
 
-  {% comment %}
-    Link to your product with the 'within: collection' filter for the link to be aware of the collection.
-    This allows you to create collection-based navigation on the product page.
-
-    Results of using 'within: collection':
-    - Instead of a URL with /products/product-handle
-      you would get /collections/collection-handle/products/product-handle
-
-    For more info on navigation within a collection
-      - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
-
-  {% endcomment %}
-  <a href="{{ product.url | within: collection }}" class="grid__image">
-    <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-  </a>
-
-
-  <p>
     {% comment %}
-      You can show a leading 'from' or 'up to' by checking 'product.price_varies'
-      if your variants have different prices.
-    {% endcomment %}
-    {% if on_sale %}
-      {% if product.price_varies %}
-        {% assign sale_price = product.price | money %}
-        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-      {% else %}
-        <strong>{{ 'products.product.on_sale' | t }}</strong>
-        {{ product.price | money }}
-      {% endif %}
-    {% else %}
-      {% if product.price_varies %}
-        {% assign price = product.price | money %}
-        {{ 'products.general.from_text_html' | t: price: price }}
-      {% else %}
-        {{ product.price | money }}
-      {% endif %}
-    {% endif %}
-    {% if sold_out %}
-      <br><strong>{{ 'products.product.sold_out' | t }}</strong>
-    {% endif %}
-    {% if on_sale %}
-      <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-      <br><s>{{ product.compare_at_price | money }}</s>
-    {% endif %}
-  </p>
-    <p class="h6">
-        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-    </p>
-    <p>{{ product.description | strip_html | truncatewords: 8 }}</p>
+      Link to your product with the 'within: collection' filter for the link to be aware of the collection.
+      This allows you to create collection-based navigation on the product page.
 
-    <a href="{{ product.url | within: collection }}">
-        <span class="input-group-btn">
-            <div class="btn btn--small btn--secondary arrow-after">Details &nbsp; &nbsp;</div>
-        </span>
+      Results of using 'within: collection':
+      - Instead of a URL with /products/product-handle
+        you would get /collections/collection-handle/products/product-handle
+
+      For more info on navigation within a collection
+        - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
+
+    {% endcomment %}
+    <a href="{{ product.url | within: collection }}" class="grid__image">
+      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
     </a>
 
+
+    <p>
+      {% comment %}
+        You can show a leading 'from' or 'up to' by checking 'product.price_varies'
+        if your variants have different prices.
+      {% endcomment %}
+      {% if on_sale %}
+        {% if product.price_varies %}
+          {% assign sale_price = product.price | money %}
+          {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+        {% else %}
+          <strong>{{ 'products.product.on_sale' | t }}</strong>
+          {{ product.price | money }}
+        {% endif %}
+      {% else %}
+        {% if product.price_varies %}
+          {% assign price = product.price | money %}
+          {{ 'products.general.from_text_html' | t: price: price }}
+        {% else %}
+          {{ product.price | money }}
+        {% endif %}
+      {% endif %}
+      {% if sold_out %}
+        <br><strong>{{ 'products.product.sold_out' | t }}</strong>
+      {% endif %}
+      {% if on_sale %}
+        <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+        <br><s>{{ product.compare_at_price | money }}</s>
+      {% endif %}
+    </p>
+      <p class="h6">
+          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+      </p>
+      <p>{{ product.description | strip_html | truncatewords: 8 }}</p>
+
+
+  </div>
+
+<!--     <div class="grid__item {{ grid_item_width }} collection-menu-item"> -->
+
+      <a href="{{ product.url | within: collection }}">
+          <span class="input-group-btn">
+              <div class="btn btn--full arrow-after">SHOP NOW &nbsp; &nbsp;
+              <i class="fa fa-chevron-right"></i>
+              </div>
+          </span>
+      </a>
+<!-- 
+    </div> -->
 
 </div>

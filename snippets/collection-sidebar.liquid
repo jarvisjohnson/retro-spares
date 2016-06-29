@@ -69,3 +69,17 @@
     {% endfor %}
   </ul>
 {% endif %}
+
+<h4>Shop by vendor:</h4>
+<ul>
+  {% for product_vendor in collection.all_vendors %}
+  <li>
+    {% if current_tags contains product_vendor %}
+    <a class="active" href="{{ collection.url }}">{{ product_vendor }}</a>
+    {% else %}
+    <a href="{{ collection.url }}/{{ product_vendor | handle }}">{{ product_vendor }}</a>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
