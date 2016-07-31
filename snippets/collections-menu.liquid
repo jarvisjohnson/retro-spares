@@ -10,6 +10,9 @@
 {% endcomment %}
 <nav role="navigation" class="grey sidebar-nav" id="sidebar-nav">
 	<ul class="grey sidebar-links" id="accordion">
+		<li class="has-dropdown">
+		Browse By:
+		</li>
 
   		{% for link in linklists.side-menu-collections.links %}
 	    {% assign child_list_handle = link.title | handle %}

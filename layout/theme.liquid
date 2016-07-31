@@ -28,10 +28,8 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
-  {% if template == 'index' %}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css' | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css' | stylesheet_tag }}
-  {% endif %}
   
   {{ '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' | stylesheet_tag }}
 
@@ -44,10 +42,8 @@
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
   {{ 'modernizr.min.js' | asset_url | script_tag }}
 
-  {% if template == 'index' %}
-    {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js' | script_tag }}
-    {{ '//cdn.jsdelivr.net/lettering/0.7.0/jquery.lettering.min.js' | script_tag }}
-  {% endif %}
+  {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js' | script_tag }}
+  {{ '//cdn.jsdelivr.net/lettering/0.7.0/jquery.lettering.min.js' | script_tag }}
 
   {% comment %}
     If you store has customer accounts disabled, you can remove the following JS file
@@ -335,7 +331,6 @@
 
 
         <div class="wrapper">
-          map 100%
           <div>
             Retro spares info text here...
           </div>
@@ -568,18 +563,7 @@
       });
     </script>
   {% endif %}
-  {% if template == 'index' %}
-  <script type="text/javascript">
-    jQuery(document).ready(function(){
-      $('.slides').slick({
-        dots: true,
-        speed: 500,
-        autoplay: true,
-        autoplaySpeed: 3500,
-          nextArrow: '<div class="directionNav"><a class="nextNav"><i class="fa fa-chevron-right"></i><span></span></a></div>',
-          prevArrow: '<div class="directionNav"><a class="prevNav"><i class="fa fa-chevron-left"></i><span></span></a></div>'
-      });
-    });
+    <script type="text/javascript">
     jQuery(document).ready(function(){
       $('.carousel').slick({
         dots: false,
@@ -593,7 +577,23 @@
         jQuery(".word_split").lettering('words');
     });
   </script>
+  {% if template == 'index' %}
+    <script type="text/javascript">
+      jQuery(document).ready(function(){
+        $('.slides').slick({
+          dots: true,
+          speed: 500,
+          autoplay: true,
+          autoplaySpeed: 3500,
+            nextArrow: '<div class="directionNav"><a class="nextNav"><i class="fa fa-chevron-right"></i><span></span></a></div>',
+            prevArrow: '<div class="directionNav"><a class="prevNav"><i class="fa fa-chevron-left"></i><span></span></a></div>'
+        });
+      });
+    </script>
   {% endif %}
+
+
+
 
 </body>
 </html>

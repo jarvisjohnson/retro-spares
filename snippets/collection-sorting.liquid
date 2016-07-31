@@ -6,6 +6,25 @@
 
 
 <!-- /snippets/collection-sorting.liquid -->
+
+    <ul class="clearfix filters">
+      <li class="clearfix filter">
+        {% assign tags = 'Ford, Holden, Toyota, BMW, Daewoo, Volkswagen, Mitsubishi, Nissan, Valiant, Rover, Subaru, Honda, Hyundai, Suzuki, Jeep, Mazda, Daihatsu, Daewoo, Morris, Studebaker, Vauxhall' | split: ',' %}
+        <label>Filter by Vehicle Make:</label>
+        <select class="coll-filter">
+          <option value="">All</option>
+          {% for t in tags %}
+          {% assign tag = t | strip %}
+          {% if current_tags contains tag %}
+          <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+          {% elsif collection.all_tags contains tag %}
+          <option value="{{ tag | handle }}">{{ tag }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </li>
+    </ul>
+
 <div class="form-horizontal">
   <label for="SortBy">{{ 'collections.sorting.title' | t }}</label>
   <select name="SortBy" id="SortBy">

@@ -2432,6 +2432,23 @@ footer a:focus {
     margin: 0 auto;
   }
 }
+
+.tags {
+    border: 1px solid #01a5e2;
+    padding: 2px 5px;
+    margin-right: 10px;
+    &:first-of-type {
+      color: $colorNavText;
+      &:after{
+        content: ':';
+      }
+    }
+}
+
+.sku {
+  color: #000;
+  font-weight: bold;
+}
 /*============================================================================
   #Homepage
 ==============================================================================*/
@@ -2479,6 +2496,10 @@ footer a:focus {
 .filter--active {
   font-weight: bold;
 }
+.filters { list-style-type: none; }
+.filter { float: left; margin-right: 15px; }
+.filter label { display: block; margin: 10px 0; }
+.filter select { max-width: 200px; }
 
 /*============================================================================
   #Breadcrumbs
@@ -2524,6 +2545,10 @@ footer a:focus {
   li {
     margin-bottom: $gutter;
   }
+}
+
+.comma:last-of-type{
+  display: none;
 }
 
 

@@ -165,6 +165,7 @@
 {{ 'option_selection.js' | shopify_asset_url | script_tag }}
 <script>
   var selectCallback = function(variant, selector) {
+
     timber.productPage({
       money_format: "{{ shop.money_format }}",
       variant: variant,
