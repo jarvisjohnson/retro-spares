@@ -246,63 +246,66 @@
       </nav>
 
       <header class="site-header" role="banner">
-      <div class="wrapper">
+        <div class="wrapper">
 
-        <div class="grid--full grid--table">
-          <div class="grid__item large--one-third">
-            {% comment %}
-            Use the uploaded logo from theme settings if enabled.
-            Site name gets precedence with H1 tag on homepage, div on other pages.
-            {% endcomment %}
-            {% if template == 'index' %}
-            <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
-              {% else %}
-              <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
-                {% endif %}
-                {% if settings.logo_use_image %}
-                  <a href="/" itemprop="url" class="site-header__logo-link">
-                    <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-                  </a>
+          <div class="grid--full grid--table">
+            <div class="grid__item large--one-third">
+              {% comment %}
+              Use the uploaded logo from theme settings if enabled.
+              Site name gets precedence with H1 tag on homepage, div on other pages.
+              {% endcomment %}
+              {% if template == 'index' %}
+              <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
                 {% else %}
-                  <a href="/" itemprop="url">{{ shop.name }}</a>
-                {% endif %}
-                {% if template == 'index' %}
-            </h1>
-            {% else %}
+                <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+                  {% endif %}
+                  {% if settings.logo_use_image %}
+                    <a href="/" itemprop="url" class="site-header__logo-link">
+                      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                    </a>
+                  {% else %}
+                    <a href="/" itemprop="url">{{ shop.name }}</a>
+                  {% endif %}
+                  {% if template == 'index' %}
+              </h1>
+              {% else %}
+            </div>
+            {% endif %}
           </div>
-          {% endif %}
-        </div>
-        <div class="grid__item large--one-quarter large--text-center medium-down--hide">
-          {{ shop.address.street }}, {{ shop.address.city }} {{ shop.address.province }} {{ shop.address.zip }}
-        </div>
-        <div class="grid__item large--one-quarter large--text-center medium-down--hide">
-          {{ shop.phone }} 
-        </div>
-        <div class="grid__item large--one-sixth large--text-right medium-down--hide">
-
-
-          {% comment %}
-          Show number of items in the cart and total cost in the /cart link
-
-          Ajax Cart Notes:
-          - #cartCount updates the total number of items in the cart
-          - #cartCost updates the total cost of the cart
-          - Documentation:  http://shopify.com/timber#ajax-cart
-          {% endcomment %}
-          <div>
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
-              <span class="icon icon-cart" aria-hidden="true"></span>
-              {{ 'layout.cart.title' | t }}
-              (<span id="CartCount">{{ cart.item_count }}</span>
-              {{ 'layout.cart.items_count' | t: count: cart.item_count }}
-              <span id="CartCost">{{ cart.total_price | money }}</span>)
+          <div class="grid__item large--one-quarter large--text-center medium-down--hide">
+            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">            
+              <i class="fa fa-map-marker header-icon"></i>
+              {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
+             </a> 
+          </div>
+          <div class="grid__item large--one-quarter large--text-center medium-down--hide">
+            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">          
+              <i class="fa fa-phone header-icon"></i>          
+              {{ shop.phone }} 
             </a>
           </div>
+          <div class="grid__item large--one-sixth large--text-right medium-down--hide">
 
+
+            {% comment %}
+            Show number of items in the cart and total cost in the /cart link
+
+            Ajax Cart Notes:
+            - #cartCount updates the total number of items in the cart
+            - #cartCost updates the total cost of the cart
+            - Documentation:  http://shopify.com/timber#ajax-cart
+            {% endcomment %}
+            <div>
+              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
+                <span class="icon icon-cart header-icon" aria-hidden="true"></span>
+                <span id="CartCount">{{ cart.item_count }}</span>
+              </a>
+            </div>
+
+          </div>
         </div>
-      </div>
 
-  </div>
+    </div>
   </header>
 
   <div class="search-header" role="banner">
@@ -360,9 +363,6 @@
       </div>
       {% if template == 'index' %}
       <div class="grid">
-        <div class="wrapper">
-        map 100%
-        </div>
 
           {% comment %}
           Use slick slider carousel to loop through the brands we stock
@@ -372,14 +372,6 @@
             {% include 'carousel' %}
           {% endif %}
 
-
-
-        <div class="wrapper">
-          <div>
-            Retro spares info text here...
-          </div>
-        </div>
-
       </div>
       {% else %}
       {% endif %}
@@ -387,9 +379,122 @@
 
     <!-- begin site-footer -->
     <footer class="site-footer small--text-center" role="contentinfo">
-      <div class="wrapper">
+      <!-- begin info-text -->
+      <div class="wrapper footer__section">
         <div class="grid flex">
-            <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
+          <div class="grid__item large--one-whole">
+            {{ settings.footer_info_text }}
+          </div>
+        </div>
+      </div>
+      <!-- end info-text -->
+      <!-- begin policies-bar -->      
+      <div class="footer__section footer--dark">
+        <div class="wrapper">
+          <div class="grid">
+            <div class="grid__item large--one-third medium--one-whole">
+              <div class="grid">
+                <div class="grid__item large--one-third">
+                  <i class="fa fa-truck footer-icon"></i>
+                </div>
+                <div class="grid__item large--two-thirds">
+                  <h3>
+                    Delivery
+                  </h3>
+                  {{ settings.footer_delivery_text }}
+                </div>              
+              </div>
+            </div>
+            <div class="grid__item large--one-third medium--one-whole">
+              <div class="grid">
+                <div class="grid__item large--one-third">
+                  <i class="fa fa-clock-o footer-icon"></i>
+                </div>
+                <div class="grid__item large--two-thirds">
+                  <h3>
+                    Store Trading Hours
+                  </h3>
+                  {{ settings.footer_hours_text }}
+                </div>               
+              </div>
+            </div>
+            <div class="grid__item large--one-third medium--one-whole">
+              <div class="grid">
+                <div class="grid__item large--one-third">
+                  <i class="fa fa-arrow-circle-o-left footer-icon"></i>
+                </div>
+                <div class="grid__item large--two-thirds">
+                  <h3>
+                    Return Policy
+                  </h3>
+                  {{ settings.footer_return_policy_text }}
+                </div>              
+              </div>
+            </div>          
+          </div>
+        </div>
+      </div>
+      <!-- begin newsletter-bar -->      
+      <div class="footer__section">
+        <div class="wrapper">
+          <div class="grid">
+            <div class="grid__item large--one-half medium--one-whole text-left">
+              {% comment %}
+                MailChimp is the go-to newsletter service for Shopify.
+                Use the link below to find your MailChimp form action
+                and insert it in your site settings.
+
+                If the form action URL is not set in the theme settings,
+                it will fallback to a customer form so you can still capture the email.
+
+                MailChimp newsletter integration and requirement:
+                 - http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action
+              {% endcomment %}
+              <div class="grid">
+                <div class="grid__item large--one-sixth">
+                  <i class="fa fa-envelope-o footer-icon"></i>
+                </div>
+                <div class="grid__item large--five-sixths text-left">
+                  <h3>
+                    {{ 'layout.footer.newsletter_title' | t }}
+                  </h3>
+                </div>              
+              </div>
+            </div>
+            <div class="grid__item large--one-half medium--one-whole text-right">
+              {% if settings.newsletter_form_action != blank %}
+                <form action="{{ settings.newsletter_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="input-group">
+                  <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" id="mail" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                  <span class="input-group-btn">
+                    <input type="submit" class="btn btn__dark" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+                  </span>
+                </form>
+              {% else %}
+                {% form 'customer' %}
+                  {{ form.errors | default_errors }}
+                  {% if form.posted_successfully? %}
+                    <p class="note form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                  {% else %}
+                    <div class="input-group">
+                      <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                      <input type="hidden" name="contact[tags]" value="newsletter">
+                      <span class="input-group-btn">
+                        <input type="submit" class="btn btn__dark" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
+                      </span>
+                    </div>
+                  {% endif %}
+                {% endform %}
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end newsletter-bar -->
+      <!-- begin footer-menus -->                  
+      <div class="wrapper footer__section">
+        <div class="grid flex">
+            <div class="grid__item large--one-quarter medium--one-half small--one-whole footer-menu-wrap">
                 <h3>{{ 'layout.footer.first-menu-title' | t }}</h3>
                 {% comment %}
                 List out your footer-menu linklist (default)
@@ -430,7 +535,7 @@
                 </ul>
                 <!-- //site-nav -->
             </div>
-            <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
+            <div class="grid__item large--one-quarter medium--one-half small--one-whole footer-menu-wrap">
                 <h3>{{ 'layout.footer.second-menu-title' | t }}</h3>
                 {% comment %}
                 List out your footer-menu linklist (default)
@@ -469,8 +574,47 @@
                         {% endif %}
                     {% endfor %}
             </div>
+            <div class="grid__item large--one-quarter medium--one-half small--one-whole footer-menu-wrap">
+                <h3>Get in Touch</h3>
+                {% comment %}
+                List out your footer-menu linklist (default)
+
+                More info on linklists:
+                - http://docs.shopify.com/themes/liquid-variables/linklists
+                {% endcomment %}
+                <!-- begin site-nav -->
+                <ul class="footer-nav orange">
+                    {% for link in linklists.footer-why-buy-menu.links %}
+                        {% comment %}
+                        Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+                        More info on dropdowns:
+                        - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+                        {% endcomment %}
+                        {% assign child_list_handle = link.title | handleize %}
+                        {% if linklists[child_list_handle].links != blank %}
+                            <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
+                                <a href="{{ link.url }}">
+                                    {{ link.title }}
+                                    <span class="icon icon-arrow-down" aria-hidden="true"></span>
+                                </a>
+                                <ul class="site-nav__dropdown">
+                                    {% for childlink in linklists[child_list_handle].links %}
+                                        <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+                                            <a href="{{ childlink.url }}" >{{ childlink.title | escape }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li {% if link.active %}class="site-nav--active"{% endif %}>
+                                <a href="{{ link.url }}">{{ link.title }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+            </div>            
           {% if settings.footer_social_enable %}
-              <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
+              <div class="grid__item large--one-quarter medium--one-half push--medium--one-quarter footer-menu-wrap">
               <h3>{{ 'layout.footer.social_title' | t }}</h3>
                 <ul class="inline-list social-icons orange">
                   {% if settings.social_twitter_link != blank %}
@@ -490,63 +634,67 @@
                 </ul>
             </div>
           {% endif %}
-          {% if settings.footer_newsletter_enable %}
-            <div class="grid__item large--one-quarter medium--one-half footer-menu-wrap">
-              {% comment %}
-                MailChimp is the go-to newsletter service for Shopify.
-                Use the link below to find your MailChimp form action
-                and insert it in your site settings.
-
-                If the form action URL is not set in the theme settings,
-                it will fallback to a customer form so you can still capture the email.
-
-                MailChimp newsletter integration and requirement:
-                 - http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action
-              {% endcomment %}
-              <h3>{{ 'layout.footer.newsletter_title' | t }}</h3>
-              {% if settings.newsletter_form_action != blank %}
-                <form action="{{ settings.newsletter_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="input-group">
-                  <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="EMAIL" id="mail" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
-                  <span class="input-group-btn">
-                    <input type="submit" class="btn btn__dark" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
-                  </span>
-                </form>
-              {% else %}
-                {% form 'customer' %}
-                  {{ form.errors | default_errors }}
-                  {% if form.posted_successfully? %}
-                    <p class="note form-success">{{ 'general.newsletter_form.confirmation' | t }}</p>
-                  {% else %}
-                    <div class="input-group">
-                      <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
-                      <input type="hidden" name="contact[tags]" value="newsletter">
-                      <span class="input-group-btn">
-                        <input type="submit" class="btn btn__dark" name="subscribe" id="subscribe" value="{{ 'general.newsletter_form.submit' | t }}">
-                      </span>
-                    </div>
-                  {% endif %}
-                {% endform %}
-              {% endif %}
-
-            </div>
-          {% endif %}
+          
 
         </div>
       </div>
+      <!-- end footer-menus -->
     </footer>
   <!-- //site-footer -->
   <hr class="no-pad no-margin">
   <div class="footer_secondary">
-        <div class="wrapper">
-            <div class="grid__item text-center">
+      <div class="wrapper">
+
+        <div class="grid--full grid--table">
+          <div class="grid__item large--one-quarter large--text-left medium-down--hide">
+              {% comment %}
+              Use the uploaded logo from theme settings if enabled.
+              Site name gets precedence with H1 tag on homepage, div on other pages.
+              {% endcomment %}
+              {% if template == 'index' %}
+                <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+              {% else %}
+                <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+              {% endif %}
+              {% if settings.logo_use_image %}
+                  <a href="/" itemprop="url" class="site-header__logo-link">
+                    <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                  </a>
+              {% else %}
+                  <a href="/" itemprop="url">{{ shop.name }}</a>
+              {% endif %}
+              {% if template == 'index' %}
+                </h1>
+              {% else %}
+                </div>
+              {% endif %}
+          </div>
+          <div class="grid__item large--one-quarter large--text-center medium--one-whole">
+            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">            
+              <i class="fa fa-map-marker header-icon"></i>
+              {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
+             </a> 
+          </div>
+          <div class="grid__item large--one-quarter large--text-center medium-down--hide">
+            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">          
+              <i class="fa fa-phone header-icon"></i>          
+              {{ shop.phone }} 
+            </a>
+          </div>
+          <div class="grid__item large--one-quarter large--text-right medium--one-whole">
 
                 {% comment %}
                 Loop through available payment methods and show their icons.
                 {% endcomment %}
                 {% unless shop.enabled_payment_types == empty %}
                 {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,laser,litecoin,maestro,master,paypal,solo,stripe,switch,visa' | split: ',' %}
-                <h4 class="text-center">{{ 'layout.footer.accepted_payments' | t }}</h4>
                 <ul class="inline-list payment-icons">
+                      <li>
+                          <span class="icon-fallback-text">
+                            <i class="fa fa-cc-paypal" aria-hidden="true"></i>
+                            <span class="fallback-text">Paypal</span>
+                          </span>
+                      </li>
                     {% for type in shop.enabled_payment_types %}
                         {% if payment_icons_available contains type %}
                             <li>
@@ -559,10 +707,27 @@
                     {% endfor %}
                 </ul>
                 {% endunless %}
+
+        </div>
+    </div>
+
+    </div>
+        <div class="wrapper">
+          <div class="grid">
+            <div class="grid__item large--one-half text-left">
+
+              <a href="#">
+                <p>&copy; {{ 'now' | date: "%Y" }} {{shop.name}}</p>
+              </a> 
+
+            </div>        
+            <div class="grid__item large--one-half text-right">
+
                 <a href="http://brendanmicallef.com/"><small>Design by</small> BM Digital</a>&nbsp;<a href="http://www.swish.online"><small>Built by </small>Swish</a> <a href="https://www.shopify.com/?ref=swish-web-developers" title="Shopify.com"><small> in </small>Shopify</a><br>
 
             </div>
         </div>
+      </div>
     </div>
   </div>
 

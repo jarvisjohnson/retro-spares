@@ -121,6 +121,7 @@ $colorNavTextHover: lighten($colorNavText, 20%);
 
 // Site Footer
 $colorFooterBg: {{ settings.color_footer_bg }};
+$colorFooterBg: {{ settings.color_footer_bg }};
 $colorSecondFooterBg: {{ settings.color_menu_main }};
 $colorFooterText: {{ settings.color_footer_text }};
 
@@ -741,6 +742,14 @@ body {
     padding: 0 $gutter;
   }
 }
+.wrapper__tighter{
+  max-width: ($siteWidth / 1.1);
+  padding: 0 ($gutter / 3);
+
+  @include at-query ($min, $small) {
+    padding: 0 ($gutter / 2);
+  }
+}
 
 .main-content {
   display: block;
@@ -856,7 +865,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: $headerFontWeight;
   margin: 0 0 0.5em;
   line-height: 1.2;
-
+  text-transform: uppercase;
   a {
     text-decoration: none;
     font-weight: inherit;
@@ -2429,12 +2438,8 @@ label.error {
 ==============================================================================*/
 .site-footer {
   background-color: $colorFooterBg;
-  padding: $gutter 0;
+  padding: 0;
   color: $colorFooterText;
-
-  @include at-query ($min, $large) {
-    padding: ($gutter * 2) 0;
-  }
 }
 .footer_secondary {
   background-color: $colorSecondFooterBg;
@@ -2447,10 +2452,22 @@ footer a:focus {
   color: $colorFooterLinkHover;
 }
 .footer-menu-wrap{
-  border-right: 1px solid black;
+  border-right: 1px solid #FFFFFF;
 }
 .footer-menu-wrap:last-child{
   border-right: none;
+}
+.footer__section{
+  padding: ($gutter / 2) 0;
+  color: $colorFooterText;
+
+  @include at-query ($min, $large) {
+    padding: $gutter 0;
+  }
+}
+.footer--dark{
+  background: $colorBtnPrimaryHover;
+  border-top: 3px solid white;
 }
 /*============================================================================
   #Product and Collection Grids
