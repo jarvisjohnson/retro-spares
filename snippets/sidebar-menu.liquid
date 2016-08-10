@@ -1,20 +1,17 @@
-<!-- /snippets/collections-menu.liquid -->
+<!-- /snippets/sidebar-menu.liquid -->
 {% comment %}
 
-  Side nav that shows up on all page on the left hand side and lists the collections as a menu
+  Side nav that shows up on all page on the left hand side and lists the Car Makes / Product Types
 
 {% endcomment %}
 
-{% comment %}
-  List of the Collections
-{% endcomment %}
 <nav role="navigation" class="grey sidebar-nav" id="sidebar-nav">
 	<ul class="grey sidebar-links" id="accordion">
 		<li class="has-dropdown" style="margin: -5px 0 5px;">
 		Browse By:
 		</li>
 
-  		{% for link in linklists.side-menu-collections.links %}
+  		{% for link in linklists.sidebar-menu.links %}
 	    {% assign child_list_handle = link.title | handle %}
 	    {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
 	    <li class="has-dropdown">
