@@ -10,14 +10,6 @@
 {% include 'breadcrumb' %}
 {% capture make %}{{page.handle}}{% endcapture %}
 
-{% comment %}
-{% assign stored_linklist = linklists.[this-page].links %}
-{% capture make %}{{ page.title | downcase }}{% endcapture %}
-
-Use class grid-uniform to have evenly sized columns clear
-each other properly at each breakpoint.
-{% endcomment %}
-
 <div class="grid-uniform flex wrap">
 
   {% comment %}
