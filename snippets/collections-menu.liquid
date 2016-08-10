@@ -25,6 +25,7 @@
 
 	        {% for child_link in linklists[child_list_handle].links %}
 	        {% assign grand_child_list_handle = child_link.title | handle %}
+	       	{% comment %}
 	        {% if linklists[grand_child_list_handle] and linklists[grand_child_list_handle].links.size > 0 %}
 	        <li class="">
 	          {{ child_link.title | link_to: child_link.url }}
@@ -41,6 +42,10 @@
 	          {{ child_link.title | link_to: child_link.url }}
 	        </li>
 	        {% endif %}
+	        {% endcomment %}
+	        <li>
+	          {{ child_link.title | link_to: child_link.url }}
+	        </li>	        
 	        {% endfor %}
 	       	<li class="all-brand-link">
 	      	 	{{ link.title | link_to: link.url }}

@@ -18,7 +18,7 @@ Use class grid-uniform to have evenly sized columns clear
 each other properly at each breakpoint.
 {% endcomment %}
 
-{% assign collection_item_width = 'large--one-half small--one-whole' %}
+{% assign collection_item_width = 'large--one-half medium--one-half small--one-whole' %}
  
 {% assign image_size = 'large' %}
  
@@ -87,7 +87,7 @@ each other properly at each breakpoint.
                   <a href="{{ product.url | within: collection }}" class="product-hover--btn">
                     <span class="input-group-btn">
                         <div class="btn btn--full arrow-after">SHOP NOW &nbsp; &nbsp;
-                        <i class="fa fa-chevron-right"></i></div>
+                        <i class="ion-ios-arrow-forward"></i></div>
                     </span>
                   </a>
               </div>
@@ -155,7 +155,7 @@ each other properly at each breakpoint.
                 </div>
 
                 <div class="grid__item {{ collection_item_width }} text-left">
-                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
+                  <a href="{{ link.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
                     {% if have_image %}
                       <img src="{{ src }}" alt="{{ link.title | escape }}" />
                     {% else %}
@@ -164,10 +164,10 @@ each other properly at each breakpoint.
                   </a>
                 </div>
 
-                  <a href="{{ product.url | within: collection }}" class="product-hover--btn">
+                  <a href="{{ link.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="product-hover--btn">
                     <span class="input-group-btn">
                         <div class="btn btn--full arrow-after">SHOP NOW &nbsp; &nbsp;
-                        <i class="fa fa-chevron-right"></i></div>
+                        <i class="ion-ios-arrow-forward"></i></div>
                     </span>
                   </a>
               </div>

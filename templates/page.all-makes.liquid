@@ -38,7 +38,7 @@ each other properly at each breakpoint.
     {% assign collection = link.object %}
 
         {% assign isEmpty = false %}
-        {% assign collection_item_width = 'large--one-half small--one-whole' %}
+        {% assign collection_item_width = 'large--one-half medium--one-half small--one-whole' %}
         <div class="grid__item {{ collection_item_width }} text-left flex wrap half-pad">
             <div class="grey card flex wrap">
               <div class="grid-uniform">
@@ -48,19 +48,14 @@ each other properly at each breakpoint.
                 {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
                 <div class="grid__item {{ collection_item_width }} text-left higher">
-                  <H2 class="upper">
-                    <a  class="word_split" href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
-                  </H2>
-                  <p>
-                    {{ collection.description | strip_html | truncatewords: 8 }}
-                  </p>
+                  <H2 class="upper"><a class="word_split" href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a></H2>
+                  <p>{{ collection.description | strip_html | truncatewords: 8 }}</p>
                   <a href="{{ product.url | within: collection }}">
                     <span class="input-group-btn">
                         <div class="btn btn--large arrow-after">SHOP NOW &nbsp; &nbsp;
-                        <i class="fa fa-chevron-right"></i></div>
+                        <i class="ion-ios-arrow-forward"></i></div>
                     </span>
                   </a>
-
                 </div>
 
                 <div class="grid__item {{ collection_item_width }} text-left">

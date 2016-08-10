@@ -28,11 +28,9 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
+    {{ '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css' | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css' | stylesheet_tag }}
-  
-  {{ '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' | stylesheet_tag }}
-
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
 
   <!-- Header hook for plugins ================================================== -->
@@ -54,6 +52,27 @@
 
   {{ 'magiczoom.css' | asset_url | stylesheet_tag }}
   {{ 'magiczoom.js' | asset_url | script_tag }}
+
+  {% comment %}
+    Call sliders in the head so they load well
+  {% endcomment %}  
+
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+
+        $(".word_split").lettering('words');
+
+        $('.slides').slick({
+          dots: true,
+          speed: 500,
+          autoplay: true,
+          autoplaySpeed: 3500,
+            nextArrow: '<div class="directionNav"><a class="nextNav"><i class="ion-ios-arrow-forward"></i><span></span></a></div>',
+            prevArrow: '<div class="directionNav"><a class="prevNav"><i class="ion-ios-arrow-back"></i><span></span></a></div>'
+        });
+
+      });
+    </script>
 
 </head>
 
@@ -161,7 +180,7 @@
 
       <nav class="nav-bar" role="navigation">
           <div class="wrapper" style="display: table;vertical-align: middle;width: 100%;">
-              <div class="medium-down--hide" style="display: table-cell">
+              <div class="medium-down--hide" style="display: inline-block">
                   {% comment %}
                   List out your main-menu linklist (default)
 
@@ -206,7 +225,7 @@
                       <div class="grid__item one-half">
                           <div class="site-nav--mobile">
                               <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer" aria-expanded="false">
-                                  <span class="icon icon-hamburger" aria-hidden="true"></span>
+                                  <span class="ion-android-menu" aria-hidden="true"></span>
                                   <span class="fallback-text">{{ 'layout.navigation.menu' | t }}</span>
                               </button>
                           </div>
@@ -215,7 +234,9 @@
                           <div class="site-nav--mobile">
                               <a href="/cart" class="js-drawer-open-right site-nav__link" aria-controls="CartDrawer" aria-expanded="false">
                   <span class="icon-fallback-text">
-                    <span class="icon icon-cart" aria-hidden="true"></span>
+                    <span class="ion-ios-cart-outline" aria-hidden="true">
+                    <span id="CartCount">{{ cart.item_count }}</span>
+                </span>
                     <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
                   </span>
                               </a>
@@ -228,12 +249,15 @@
               {% endcomment %}
               {% if shop.customer_accounts_enabled %}
               <div class="login__main medium-down--hide" style="display: table-cell;">
+                      <i class="ion-ios-contact-outline user-icon"></i>
                   {% if customer %}
                       {% if customer.first_name != blank %}
-                          {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                          {% capture first_name %}<a href="/account">
+                          {{ customer.first_name }}</a>{% endcapture %}
                           {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
                       {% else %}
-                          <a href="/account">{{ 'layout.customer.account' | t }}</a>
+                          <a href="/account">
+                          {{ 'layout.customer.account' | t }}</a>
                       {% endif %}
                       | {{ 'layout.customer.log_out' | t | customer_logout_link }}
                   {% else %}
@@ -249,7 +273,7 @@
         <div class="wrapper">
 
           <div class="grid--full grid--table">
-            <div class="grid__item large--one-third">
+            <div class="grid__item large--one-third" style="position: relative">
               {% comment %}
               Use the uploaded logo from theme settings if enabled.
               Site name gets precedence with H1 tag on homepage, div on other pages.
@@ -261,7 +285,7 @@
                   {% endif %}
                   {% if settings.logo_use_image %}
                     <a href="/" itemprop="url" class="site-header__logo-link">
-                      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                      {% include 'logo' %}
                     </a>
                   {% else %}
                     <a href="/" itemprop="url">{{ shop.name }}</a>
@@ -272,19 +296,19 @@
             </div>
             {% endif %}
           </div>
-          <div class="grid__item large--one-quarter large--text-center medium-down--hide">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">            
-              <i class="fa fa-map-marker header-icon"></i>
+          <div class="grid__item large--one-quarter large--text-center medium-down--hide flex v-center">
+            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
+              <i class="ion-ios-location-outline header-icon"></i>
               {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
              </a> 
           </div>
-          <div class="grid__item large--one-quarter large--text-center medium-down--hide">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">          
-              <i class="fa fa-phone header-icon"></i>          
+          <div class="grid__item large--one-quarter large--text-center medium-down--hide flex v-center">
+            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
+              <i class="ion-ios-telephone-outline header-icon"></i>          
               {{ shop.phone }} 
             </a>
           </div>
-          <div class="grid__item large--one-sixth large--text-right medium-down--hide">
+          <div class="grid__item large--one-sixth large--text-right medium-down--hide flex v-center">
 
 
             {% comment %}
@@ -296,9 +320,11 @@
             - Documentation:  http://shopify.com/timber#ajax-cart
             {% endcomment %}
             <div>
-              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
-                <span class="icon icon-cart header-icon" aria-hidden="true"></span>
-                <span id="CartCount">{{ cart.item_count }}</span>
+              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">
+                <span class="ion-ios-cart-outline header-icon" aria-hidden="true">
+                  <span id="CartCount">{{ cart.item_count }}</span>
+                </span>
+                
               </a>
             </div>
 
@@ -317,21 +343,23 @@
   <div class="nav-header" role="banner">
       <div class="wrapper">
                 <!-- begin site-nav -->
-                  <ul class="site-nav orange flex wrap" id="AccessibleNav">
-                      {% for link in linklists.product-types.links %}
+                  <ul class="site-nav orange flex wrap medium-down--hide" id="AccessibleNav">
+                      {% for link in linklists.product-types-short.links %}
                           {% comment %}
                           Create a dropdown menu by naming a linklist the same as a link in the parent nav
 
                           More info on dropdowns:
                           - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
                           {% endcomment %}
+
+
+                           {% comment %}
+                            Re-enable dropdown for subcategories by adding '!= blank' into if statement
+                           {% endcomment %}
+
                           {% assign child_list_handle = link.title | handleize %}
-                          {% if linklists[child_list_handle].links != blank %}
-                              <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
-                                  <a href="{{ link.url }}" class="site-nav__link">
-                                      {{ link.title }}
-                                      <span class="icon icon-arrow-down" aria-hidden="true"></span>
-                                  </a>
+                          {% if linklists[child_list_handle].links == blank %}
+                              <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true"><a href="{{ link.url }}" class="site-nav__link">{% assign words = link.title | split: ' ' %}{% for word in words %}{{ word }}{% if forloop.last == true %}{% else %}<br>{% endif %}{% endfor %}</a>
                                   <ul class="site-nav__dropdown">
                                       {% for childlink in linklists[child_list_handle].links %}
                                           <li{% if childlink.active %} class="site-nav--active"{% endif %}>
@@ -342,7 +370,7 @@
                               </li>
                           {% else %}
                               <li {% if link.active %}class="site-nav--active"{% endif %}>
-                                  <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+                                  <a href="{{ link.url }}" class="site-nav__link">{% assign words = link.title | split: ' ' %}{% for word in words %}{{ word }}{% if forloop.last == true %}{% else %}<br>{% endif %}{% endfor %}</a>
                               </li>
                           {% endif %}
                       {% endfor %}
@@ -353,13 +381,21 @@
 
     <main class="wrapper main-content" role="main">
       <div class="grid">
-        <div class="grid__item large--one-quarter medium--one-half collection-nav">
+      {% unless template contains 'account' or template contains 'cart' %}
+        <div class="grid__item large--one-quarter medium--one-whole collection-nav">
           {% include 'collections-menu' %}
           {% include 'best-sellers' %}
         </div>
-        <div class="grid__item large--three-quarters medium--one-half main-section">
+        {% endunless %}
+      {% if template contains 'account' or template contains 'cart' %}        
+        <div class="grid__item main-section">
           {{ content_for_layout }}
         </div>
+      {% else %}
+        <div class="grid__item large--three-quarters medium--one-whole main-section">
+          {{ content_for_layout }}
+        </div>
+        {% endif %}
       </div>
       {% if template == 'index' %}
       <div class="grid">
@@ -380,9 +416,9 @@
     <!-- begin site-footer -->
     <footer class="site-footer small--text-center" role="contentinfo">
       <!-- begin info-text -->
-      <div class="wrapper footer__section">
+      <div class="wrapper footer__section wrapper__tighter">
         <div class="grid flex">
-          <div class="grid__item large--one-whole">
+          <div class="grid__item large--one-whole text-center">
             {{ settings.footer_info_text }}
           </div>
         </div>
@@ -391,13 +427,13 @@
       <!-- begin policies-bar -->      
       <div class="footer__section footer--dark">
         <div class="wrapper">
-          <div class="grid">
-            <div class="grid__item large--one-third medium--one-whole">
-              <div class="grid">
-                <div class="grid__item large--one-third">
-                  <i class="fa fa-truck footer-icon"></i>
+          <div class="grid flex">
+            <div class="grid__item large--one-third medium--one-half">
+              <div class="grid flex full-height">
+                <div class="grid__item large--one-quarter icon-wrap">
+                  <i class="ion-ios-paperplane-outline footer-icon"></i>
                 </div>
-                <div class="grid__item large--two-thirds">
+                <div class="grid__item large--three-quarters pad-right medium-down--text-center">
                   <h3>
                     Delivery
                   </h3>
@@ -405,12 +441,12 @@
                 </div>              
               </div>
             </div>
-            <div class="grid__item large--one-third medium--one-whole">
-              <div class="grid">
-                <div class="grid__item large--one-third">
-                  <i class="fa fa-clock-o footer-icon"></i>
+            <div class="grid__item large--one-third medium--one-half">
+              <div class="grid flex full-height">
+                <div class="grid__item large--one-quarter icon-wrap">
+                  <i class="ion-ios-clock-outline footer-icon"></i>
                 </div>
-                <div class="grid__item large--two-thirds">
+               <div class="grid__item large--three-quarters medium-down--text-center">
                   <h3>
                     Store Trading Hours
                   </h3>
@@ -419,11 +455,11 @@
               </div>
             </div>
             <div class="grid__item large--one-third medium--one-whole">
-              <div class="grid">
-                <div class="grid__item large--one-third">
-                  <i class="fa fa-arrow-circle-o-left footer-icon"></i>
+              <div class="grid flex full-height">
+                <div class="grid__item large--one-quarter icon-wrap">
+                  <i class="ion-ios-navigate-outline footer-icon"></i>
                 </div>
-                <div class="grid__item large--two-thirds">
+                <div class="grid__item large--three-quarters medium-down--text-center">
                   <h3>
                     Return Policy
                   </h3>
@@ -437,8 +473,8 @@
       <!-- begin newsletter-bar -->      
       <div class="footer__section">
         <div class="wrapper">
-          <div class="grid">
-            <div class="grid__item large--one-half medium--one-whole text-left">
+          <div class="grid flex v-center">
+            <div class="grid__item large--one-half medium--one-whole text-left medium-down--text-center">
               {% comment %}
                 MailChimp is the go-to newsletter service for Shopify.
                 Use the link below to find your MailChimp form action
@@ -450,12 +486,12 @@
                 MailChimp newsletter integration and requirement:
                  - http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action
               {% endcomment %}
-              <div class="grid">
+              <div class="grid flex v-center">
                 <div class="grid__item large--one-sixth">
-                  <i class="fa fa-envelope-o footer-icon"></i>
+                  <i class="ion-ios-email-outline footer-icon"></i>
                 </div>
-                <div class="grid__item large--five-sixths text-left">
-                  <h3>
+                <div class="grid__item large--five-sixths text-left medium-down--text-center">
+                  <h3 style="margin: 0;"> 
                     {{ 'layout.footer.newsletter_title' | t }}
                   </h3>
                 </div>              
@@ -492,10 +528,11 @@
       </div>
       <!-- end newsletter-bar -->
       <!-- begin footer-menus -->                  
-      <div class="wrapper footer__section">
+      <div class="footer__section">
+      <div class="wrapper">
         <div class="grid flex">
-            <div class="grid__item large--one-quarter medium--one-half small--one-whole footer-menu-wrap">
-                <h3>{{ 'layout.footer.first-menu-title' | t }}</h3>
+            <div class="grid__item large--one-quarter medium--one-third small--one-whole footer-menu-wrap medium-down--text-center">
+                <h5>{{ 'layout.footer.first-menu-title' | t }}</h5>
                 {% comment %}
                 List out your footer-menu linklist (default)
 
@@ -535,8 +572,8 @@
                 </ul>
                 <!-- //site-nav -->
             </div>
-            <div class="grid__item large--one-quarter medium--one-half small--one-whole footer-menu-wrap">
-                <h3>{{ 'layout.footer.second-menu-title' | t }}</h3>
+            <div class="grid__item large--one-quarter medium--one-third small--one-whole footer-menu-wrap medium-down--text-center">
+                <h5>{{ 'layout.footer.second-menu-title' | t }}</h5>
                 {% comment %}
                 List out your footer-menu linklist (default)
 
@@ -574,8 +611,8 @@
                         {% endif %}
                     {% endfor %}
             </div>
-            <div class="grid__item large--one-quarter medium--one-half small--one-whole footer-menu-wrap">
-                <h3>Get in Touch</h3>
+            <div class="grid__item large--one-quarter medium--one-third small--one-whole footer-menu-wrap medium-down--text-center">
+                <h5>Get in Touch</h5>
                 {% comment %}
                 List out your footer-menu linklist (default)
 
@@ -614,8 +651,8 @@
                     {% endfor %}
             </div>            
           {% if settings.footer_social_enable %}
-              <div class="grid__item large--one-quarter medium--one-half push--medium--one-quarter footer-menu-wrap">
-              <h3>{{ 'layout.footer.social_title' | t }}</h3>
+              <div class="grid__item large--one-quarter medium--one-whole footer-menu-wrap  medium-down--text-center">
+              <h5>{{ 'layout.footer.social_title' | t }}</h5>
                 <ul class="inline-list social-icons orange">
                   {% if settings.social_twitter_link != blank %}
                     <li>
@@ -638,96 +675,101 @@
 
         </div>
       </div>
+      </div>
       <!-- end footer-menus -->
     </footer>
   <!-- //site-footer -->
   <hr class="no-pad no-margin">
   <div class="footer_secondary">
-      <div class="wrapper">
+     <div class="footer__section footer--light">
+        <div class="wrapper">
 
-        <div class="grid--full grid--table">
-          <div class="grid__item large--one-quarter large--text-left medium-down--hide">
-              {% comment %}
-              Use the uploaded logo from theme settings if enabled.
-              Site name gets precedence with H1 tag on homepage, div on other pages.
-              {% endcomment %}
-              {% if template == 'index' %}
-                <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
-              {% else %}
-                <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
-              {% endif %}
-              {% if settings.logo_use_image %}
-                  <a href="/" itemprop="url" class="site-header__logo-link">
-                    <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-                  </a>
-              {% else %}
-                  <a href="/" itemprop="url">{{ shop.name }}</a>
-              {% endif %}
-              {% if template == 'index' %}
-                </h1>
-              {% else %}
-                </div>
-              {% endif %}
-          </div>
-          <div class="grid__item large--one-quarter large--text-center medium--one-whole">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">            
-              <i class="fa fa-map-marker header-icon"></i>
-              {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
-             </a> 
-          </div>
-          <div class="grid__item large--one-quarter large--text-center medium-down--hide">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">          
-              <i class="fa fa-phone header-icon"></i>          
-              {{ shop.phone }} 
-            </a>
-          </div>
-          <div class="grid__item large--one-quarter large--text-right medium--one-whole">
-
+          <div class="grid--full grid--table flex v-center">
+              <div class="grid__item large--one-third" style="position: relative">
                 {% comment %}
-                Loop through available payment methods and show their icons.
+                Use the uploaded logo from theme settings if enabled.
+                Site name gets precedence with H1 tag on homepage, div on other pages.
                 {% endcomment %}
-                {% unless shop.enabled_payment_types == empty %}
-                {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,laser,litecoin,maestro,master,paypal,solo,stripe,switch,visa' | split: ',' %}
-                <ul class="inline-list payment-icons">
-                      <li>
-                          <span class="icon-fallback-text">
-                            <i class="fa fa-cc-paypal" aria-hidden="true"></i>
-                            <span class="fallback-text">Paypal</span>
-                          </span>
-                      </li>
-                    {% for type in shop.enabled_payment_types %}
-                        {% if payment_icons_available contains type %}
-                            <li>
-                          <span class="icon-fallback-text">
-                            <span class="icon icon-{{type}}" aria-hidden="true"></span>
-                            <span class="fallback-text">{{ type | replace: '_',' '}}</span>
-                          </span>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-                {% endunless %}
+                {% if template == 'index' %}
+                <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+                  {% else %}
+                  <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+                    {% endif %}
+                    {% if settings.logo_use_image %}
+                      <a href="/" itemprop="url" class="site-header__logo-link">
+                        {% include 'logo' %}
+                      </a>
+                    {% else %}
+                      <a href="/" itemprop="url">{{ shop.name }}</a>
+                    {% endif %}
+                    {% if template == 'index' %}
+                </h1>
+                {% else %}
+              </div>
+              {% endif %}
+            </div>
+            <div class="grid__item large--one-quarter large--text-center medium--one-half flex v-center med-pad">
+              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
+                <i class="ion-ios-location-outline header-icon"></i>
+                {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
+               </a> 
+            </div>
+            <div class="grid__item large--one-quarter large--text-center medium--one-half flex v-center med-pad">
+              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
+                <i class="ion-ios-telephone-outline header-icon"></i>          
+                {{ shop.phone }} 
+              </a>
+            </div>
+            <div class="grid__item large--one-quarter large--text-right medium--one-whole flex v-center">
 
-        </div>
-    </div>
+                  {% comment %}
+                  Loop through available paymenft methods and show their icons.
+                  {% endcomment %}
+                  {% unless shop.enabled_payment_types == empty %}
+                  {% assign payment_icons_available = 'amazon_payments,american_express,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,laser,litecoin,maestro,master,paypal,solo,stripe,switch,visa' | split: ',' %}
+                  <ul class="inline-list payment-icons flex v-center" style="margin:0;">
+                        <li>
+                            <span class="icon-fallback-text">
+                              <span class="icon icon-paypal" aria-hidden="true"></i>
+                              <span class="fallback-text">Paypal</span>
+                            </span>
+                        </li>
+                      {% for type in shop.enabled_payment_types %}
+                          {% if payment_icons_available contains type %}
+                              <li>
+                            <span class="icon-fallback-text">
+                              <span class="icon icon-{{type}}" aria-hidden="true"></span>
+                              <span class="fallback-text">{{ type | replace: '_',' '}}</span>
+                            </span>
+                              </li>
+                          {% endif %}
+                      {% endfor %}
+                  </ul>
+                  {% endunless %}
+
+          </div>
+      </div>
 
     </div>
+    </div>
+      <div class="footer__section footer--light">
         <div class="wrapper">
           <div class="grid">
-            <div class="grid__item large--one-half text-left">
+            <div class="grid__item large--one-half text-left medium-down--text-center">
 
               <a href="#">
                 <p>&copy; {{ 'now' | date: "%Y" }} {{shop.name}}</p>
               </a> 
 
             </div>        
-            <div class="grid__item large--one-half text-right">
+            <div class="grid__item large--one-half text-right medium-down--text-center">
 
                 <a href="http://brendanmicallef.com/"><small>Design by</small> BM Digital</a>&nbsp;<a href="http://www.swish.online"><small>Built by </small>Swish</a> <a href="https://www.shopify.com/?ref=swish-web-developers" title="Shopify.com"><small> in </small>Shopify</a><br>
 
             </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 
@@ -770,33 +812,34 @@
         // Bind to 'afterCartLoad.ajaxCart' to run any javascript after the cart has loaded in the DOM
         timber.RightDrawer.open();
       });
-    </script>
-  {% endif %}
-    <script type="text/javascript">
+
     jQuery(document).ready(function(){
-      $('.carousel').slick({
-        dots: false,
-        speed: 300,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        arrows: false,
-      });
-    });    
-    $(document).ready(function() {
-        jQuery(".word_split").lettering('words');
-    });
-  </script>
-  {% if template == 'index' %}
-    <script type="text/javascript">
-      jQuery(document).ready(function(){
-        $('.slides').slick({
-          dots: true,
-          speed: 500,
+
+        $('.carousel').slick({
+          dots: false,
+          speed: 300,
           autoplay: true,
-          autoplaySpeed: 3500,
-            nextArrow: '<div class="directionNav"><a class="nextNav"><i class="fa fa-chevron-right"></i><span></span></a></div>',
-            prevArrow: '<div class="directionNav"><a class="prevNav"><i class="fa fa-chevron-left"></i><span></span></a></div>'
-        });
+          autoplaySpeed: 2000,
+          arrows: false,
+          infinite: true,
+          responsive: [
+          {
+            breakpoint: 769,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3
+            }
+          },
+          {
+            breakpoint: 481,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          },          
+          ]
+        }); 
+
       });
     </script>
   {% endif %}

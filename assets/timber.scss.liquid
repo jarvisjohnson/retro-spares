@@ -159,10 +159,10 @@ $transition: all 300ms cubic-bezier(0.57, 0.06, 0.05, 0.95);
 
 /*================ Typography ================*/
 
-$headerFontStack: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$headerFontStack: Arial, 'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif;
 $headerFontWeight: 700;
 
-$bodyFontStack: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$bodyFontStack: Arial, 'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif;
 $baseFontSize: 14px; // Henceforth known as 1em
 
 @font-face {
@@ -721,7 +721,8 @@ $class-type: unquote(".");
   #Basic Styles
 ==============================================================================*/
 html {
-  background-color: $colorFooterBg;
+overflow: -moz-scrollbars-vertical; 
+overflow-y: scroll;
 }
 
 body {
@@ -742,19 +743,14 @@ body {
     padding: 0 $gutter;
   }
 }
-.wrapper__tighter{
-  max-width: ($siteWidth / 1.1);
-  padding: 0 ($gutter / 3);
-
-  @include at-query ($min, $small) {
-    padding: 0 ($gutter / 2);
-  }
-}
 
 .main-content {
   display: block;
   margin-top: 0;
   padding-bottom: $gutter * 2;
+  @include at-query ($max, $medium) {
+    padding-bottom: $gutter;
+  }  
 }
 
 /*============================================================================
@@ -825,12 +821,27 @@ body {
   display:-ms-flexbox;
   display:flex;
 }
+.grid.flex{
+    @include at-query ($max, $medium) {
+    display: block;
+  }
+}
 .wrap{
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+.full-height{
+  height: 100%;
+}
+.v-center{
+  align-items: center;
+  justify-content: center;
+}
 .upper{
   text-transform: uppercase;
+}
+.lowercase{
+  text-transform: none;
 }
 .higher {
   z-index: 10;
@@ -1058,7 +1069,7 @@ hr {
   border: 1px solid $colorBorder;
   border-radius: $radius;
   padding: 0 5px;
-  height: 37px; // same as form elements
+  height: 40px; // same as form elements
   overflow: hidden;
 
   /*================ Only show on larger screens ================*/
@@ -1267,10 +1278,19 @@ li { margin-bottom: 0.25em; }
 
 
 ul.orange, ul.grey {
-  list-style: none;
-  margin: 0;
+    list-style: none;
+    margin: 0;
+
+
 }
 
+footer 
+ul.orange, footer ul.grey {
+      @include at-query($max, $medium) {
+    margin-left: 30%;
+    text-align: left;
+  }
+}
 ul.square { list-style: square outside; }
 ul.disc { list-style: disc outside; }
 ol.alpha { list-style: lower-alpha outside; }
@@ -1333,11 +1353,11 @@ nav *{
 
 ul.orange li a:before, ul.grey li a:after, .slider-text span:after{
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px/1 Ionicons;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
-  content: "\f054";
+  content: "\f125";
   padding: 0 10px 0 0;
 }
 .sidebar-links li a:after{
@@ -1355,13 +1375,16 @@ ul.orange li a:before, ul.grey li a:after, .slider-text span:after{
         background: $colorForeground;
         color: #ffffff;
         text-transform: none;
-        padding: 5px 15px 5px 18px !important;
+        padding: 6px 15px 6px 18px !important;
         border-bottom: 1px solid #fff;
         transition: $transition;
         &:hover{
           color: $colorNavTextHover;
           }
+        @include at-query ($max, $medium) {
+          padding: 9px 15px 9px 18px !important;
         }
+      }
   }
 }
 
@@ -1536,6 +1559,7 @@ img {
 
 svg:not(:root) {
   overflow: hidden;
+  max-width: 100%;
 }
 
 img,
@@ -1814,7 +1838,7 @@ label.error {
 
 .input-group .btn,
 .input-group .input-group-field {
-  height: 37px;
+  height: 50px;
 }
 
 .input-group .input-group-field {
@@ -1838,7 +1862,26 @@ label.error {
     display: inline-block;
   }
 }
-
+.nav-bar .icon-fallback-text .icon {
+    @include at-query ($max, $medium) {
+      font-size: 2em; 
+    }
+  }
+.icon-wrap{
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.ion-ios-arrow-forward:before, .ion-ios-search-strong:before {
+  font-size: 1.2em;
+  vertical-align: text-bottom;
+}
+.ion-ios-search-strong{
+  font-size: 1.4em;
+}
+.ion-ios-navigate-outline{
+transform: rotate(-135deg);
+}
 /*============================================================================
   A generic way to visually hide content while
   remaining accessible to screen readers (h5bp.com)
@@ -1912,7 +1955,7 @@ label.error {
   cursor: default;
 
   li {
-    margin: 0 ($gutter / 4) ($gutter / 4);
+    margin: 0 ($gutter / 6);
     color: {{ settings.color_footer_social_link }};
     cursor: default;
   }
@@ -1925,6 +1968,12 @@ label.error {
   .fallback-text {
     text-transform: capitalize;
   }
+}
+
+.fa-cc-paypal{
+    font-size: 25px;
+    line-height: 30px;
+    color: {{ settings.color_footer_social_link }};
 }
 
 .social-icons li {
@@ -1975,7 +2024,7 @@ label.error {
   #Site Header
 ==============================================================================*/
 .site-header {
-  padding: ($gutter / 2) 0;
+  padding: ($gutter / 2) 0 0;
 
   .grid--table {
     display: table;
@@ -1988,11 +2037,18 @@ label.error {
       vertical-align: middle;
     }
   }
+  a {
+    color: #000;
+    i, .icon {
+      color: $colorPrimary;
+    }
+  }
+
 }
 
 .site-header__logo {
   text-align: center;
-  margin: 0 auto;
+  margin: 0 $gutter 0 auto;
   max-width: 100%;
 
   @include at-query ($min, $large) {
@@ -2020,7 +2076,7 @@ label.error {
 }
 
 .site-header__cart-toggle {
-  display: inline-block;
+  // display: inline-block;
 }
 
 .site-header__search {
@@ -2039,6 +2095,22 @@ label.error {
   }
 }
 
+.ion-ios-cart-outline{
+  position: relative;
+  color: $colorPrimary;
+}
+#CartCount{
+position: absolute;
+    font-size: .31em;
+    top: 18px;
+    left: 29px;
+    color: #000000;
+    @include at-query ($max, $medium) {
+      left: 14px;
+      font-size: .4em;
+      top: 9px;
+    }
+}
 /*============================================================================
   #Site Nav and Dropdowns
 ==============================================================================*/
@@ -2051,7 +2123,10 @@ label.error {
   font-size: em(14px);
   cursor: default;
   margin: 0 0 0 (-$gutter / 2);
-
+    display: table;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
   li {
     margin: 0 ($gutter/2) 0 0;
     display: block;
@@ -2067,8 +2142,18 @@ label.error {
   float:right;
   display: inline-block;
   a{
-    padding: $gutter / 2;
+    padding: 0 ($gutter / 2);
   }
+}
+
+.header-icon{
+  font-size: 3em;
+    padding: 0 ($gutter / 2);
+}
+.user-icon{
+  font-size: 2em;
+  padding:  ($gutter / 3) 0 0;
+  vertical-align: middle;
 }
 
 /*================ Home to hamburger and cart that toggle drawers ================*/
@@ -2083,7 +2168,7 @@ label.error {
 .site-nav__link {
   display: block;
   text-decoration: none;
-  padding: $gutter / 2;
+  padding: $gutter / 3;
   white-space: nowrap;
   color: $colorNavText;
   display: inline-block;
@@ -2157,26 +2242,44 @@ label.error {
 }
 .nav-header {
   background-color: $colorFooterBg;
-  padding: ($gutter / 3) 0;
+  padding: ($gutter / 10) 0;
   color: $colorBtnPrimaryText;
 
   @include at-query ($max, $medium) {
     margin: 0 auto;
     text-align: center;
   }
-  ul.site-nav li{
-    flex: 8%;
-    margin: 0 ($gutter / 5) 0 0;
+  ul.site-nav {
+  margin-left: $gutter / 2;
+  li{
+    overflow: visible;
+    display: table-cell;
+    vertical-align: middle;
+    max-width: 70px;
+    min-width: 50px;
+    border-top: solid 4px transparent;
     a{
-      font-size: .9em;
-      color: $colorBtnPrimaryText;
-      padding: ($gutter / 5);
+      width: 100%;
+      color: #fff;
+      text-decoration: none;
+      vertical-align: middle;
+      display: inline-block;
+      text-transform: none;
+      font-size: 12px;
+      border-top: none;
+      padding: 7px 0;
+      font-family: Arial,sans-serif;
+      font-weight: bold;
       &:before{ 
         padding: 0 ($gutter / 15) 0 0;
+        position: absolute;
+        left: -($gutter / 3);
+        top: 20%;        
       }
       &:hover{
        color: $colorNavTextHover;
         }
+      }
     }
   }
 }
@@ -2442,8 +2545,8 @@ label.error {
   color: $colorFooterText;
 }
 .footer_secondary {
-  background-color: $colorSecondFooterBg;
-  padding: ($gutter / 2) 0;
+  background-color: #FFFFFF;
+  padding: 0;
   color: $colorFooterText;
 }
 
@@ -2460,14 +2563,71 @@ footer a:focus {
 .footer__section{
   padding: ($gutter / 2) 0;
   color: $colorFooterText;
+  font-weight: 600;
 
   @include at-query ($min, $large) {
     padding: $gutter 0;
+  }
+  a{
+    text-transform: none;
+  }&:last-child{
+    padding-top: 0;
+  }
+}
+.wrapper__tighter{
+  max-width: ($siteWidth / 1.5);
+  padding: ($gutter * 1.3) 0;
+
+  @include at-query ($max, $medium) {
+    padding: $gutter;
   }
 }
 .footer--dark{
   background: $colorBtnPrimaryHover;
   border-top: 3px solid white;
+}
+.footer--light{
+  border-bottom: 2px solid $colorBorderSecondary;
+  &:last-child{
+    border-bottom: 0;
+    padding-bottom: 0;
+    padding-top: $gutter / 3;
+    a{
+      text-transform: uppercase;
+      font-weight: normal;
+      color: $colorTextBody;
+    }
+  }
+    padding: ($gutter / 3) 0;
+
+  @include at-query ($max, $medium) {
+    padding: $gutter;
+  }
+    a {
+    color: #000;
+    i {
+      color: $colorPrimary;
+    }
+  }
+  svg{
+    width: 300px;
+    height: 54px;
+  }
+}
+.footer-icon{
+  font-size: 4em;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer-nav{
+  padding-top: ($gutter / 4);
+}
+.pad-right{
+    padding-right: 0;
+
+  @include at-query ($min, $large) {
+    padding-right: $gutter;
+  } 
 }
 /*============================================================================
   #Product and Collection Grids
@@ -2498,6 +2658,16 @@ footer a:focus {
   color: #000;
   font-weight: bold;
 }
+.med-pad{
+   @include at-query ($max, $medium) {
+    padding: ($gutter / 2) 0;
+  }  
+}
+footer h3{
+   @include at-query ($max, $medium) {
+    margin: ($gutter / 3) 0 !important;
+  }    
+}
 /*============================================================================
   #Homepage
 ==============================================================================*/
@@ -2523,7 +2693,7 @@ footer a:focus {
 
 .word_split span:first-of-type:after{
   content: "\A";
-  white-space: pre-line;
+  // white-space: pre-line;
 }
 
 .product-hover--btn{
@@ -2900,8 +3070,8 @@ ul.clearfix.filters {
   }
 }
 .slick-dots li button:before {
-  font: normal normal normal 14px/1 FontAwesome;
-  content: "\f10c";
+  font: normal normal normal 14px/1 Ionicons;
+  content: "\f3a6";
     opacity: 1;
     color: white;
 }
@@ -2950,6 +3120,12 @@ ul.clearfix.filters {
 }
 .slick-dotted.slick-slider {
   margin-bottom: ($gutter);
+}
+#HomepageCarousel{
+  padding-top: $gutter * 2;
+  @include at-query ($max, $medium) {
+    padding-top: $gutter;
+  }  
 }
 /*================ Quantity Selectors in Ajax Cart ================*/
 .ajaxcart__qty {

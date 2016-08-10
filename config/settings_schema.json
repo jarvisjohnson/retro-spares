@@ -190,34 +190,34 @@
         "label": "MailChimp form action URL",
         "info": "[Where do I find my MailChimp form action URL?](http:\/\/docs.shopify.com\/support\/configuration\/store-customization\/where-do-i-get-my-mailchimp-form-action)"
       },
-      {   
+      {
         "type": "textarea",
         "id": "footer_info_text",
         "label": "Footer Info Text",
         "info": "Text featured at the top of the footer.",
         "default": "Retro Spares is a company which specialises in the manufacture, repairs and supply of many types of cables. Speedometer, tachometer, clutch, hand brake, accelerator, automotive, mechanical control, bowden type control cables and custom cables made to samples."
       },
-      {   
+      {
         "type": "textarea",
         "id": "footer_delivery_text",
         "label": "Delivery",
         "info": "Text featured at the top of the footer.",
         "default": "All orders will be dispatched in 2-3 business days."
       },
-      {   
+      {
         "type": "textarea",
         "id": "footer_hours_text",
         "label": "Store Trading Hours",
         "info": "Text featured at the top of the footer.",
         "default": "Our store is open 9:00am to 7:00pm Monday - Friday."
-      },  
-      {   
+      },
+      {
         "type": "textarea",
         "id": "footer_return_policy_text",
         "label": "Return Policy",
         "info": "Text featured at the top of the footer.",
         "default": "We have a 14 day return policy."
-      }              
+      }
     ]
   },
   {

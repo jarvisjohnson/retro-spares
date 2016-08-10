@@ -26,16 +26,16 @@
 {% paginate search.results by 10 %}
 
   <div class="grid">
-    <div class="grid__item large--two-thirds push--large--one-sixth">
+    <div class="grid__item large--one-whole">
 
       {% if search.performed %}
         {% if search.results_count == 0 %}
-          <h1 class="text-center">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
+          <h3 class="text-center lowercase">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h3>
         {% else %}
-          <h1 class="text-center">{{ 'general.search.results_for_html' | t: terms: search.terms }}</h1>
+          <h3 class="text-center lowercase">{{ 'general.search.results_for_html' | t: terms: search.terms }}</h3>
         {% endif %}
       {% else %}
-        <h1 class="text-center">{{ 'general.search.title' | t }}</h1>
+        <h3 class="text-center lowercase">{{ 'general.search.title' | t }}</h3>
       {% endif %}
 
       {% include 'search-bar' %}
@@ -82,6 +82,8 @@
                   {% endcomment %}
                   <div class="grid__item two-thirds {% unless item.featured_image %}push--one-third{% endunless %}">
                     <h3>{{ item.title | link_to: item.url }}</h3>
+
+                      <p class="sku">{{ product.variants.first.sku }}</p>
 
                     {% if item.price %}
                       <p>
@@ -133,6 +135,8 @@
                 {% endif %}
 
                 <h5>{{ item.title | link_to: item.url }}</h5>
+
+                  <p class="sku">{{ product.variants.first.sku }}</p>
 
                 {% if item.price %}
                   <p>

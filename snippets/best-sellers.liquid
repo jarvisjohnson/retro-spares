@@ -4,28 +4,30 @@
 Shows 'best sellers' section in sidebar on all pages, below collections menu
 
 {% endcomment %}
+<div class="medium-down--hide">
+	<h2>
+	    <span class="word2">
+	        BEST SELLERS
+	    </span>
+	</h2>
 
-<h2>
-    <span class="word2">
-        BEST SELLERS
-    </span>
-</h2>
+	{% assign image_size = 'large' %}
 
-{% assign image_size = 'large' %}
+	{% if linklists.best-sellers.links.size > 0 %}
 
-{% if linklists.best-sellers.links.size > 0 %}
+	<!--     <div>
+	 -->
+	        {% for link in linklists.best-sellers.links %}
 
-<!--     <div>
- -->
-        {% for link in linklists.best-sellers.links %}
+	            {% assign product = link.object %}
 
-            {% assign product = link.object %}
+	                    {% assign grid_item_width = 'large--one-whole' %}
+	                    {% include 'product-grid-item-menu' %}
 
-                    {% assign grid_item_width = 'large--one-whole' %}
-                    {% include 'product-grid-item-menu' %}
+	        {% endfor %}
 
-        {% endfor %}
+	    <!-- </div> -->
 
-    <!-- </div> -->
+	{% endif %}
 
-{% endif %}
+</div>

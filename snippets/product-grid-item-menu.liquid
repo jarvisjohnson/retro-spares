@@ -1,4 +1,4 @@
-<!-- /snippets/product-grid-item.liquid -->
+<!-- /snippets/product-grid-item-menu.liquid -->
 {% comment %}
 
   This snippet is used to showcase each product during the loop,
@@ -89,6 +89,7 @@
       <p class="h6">
           <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
       </p>
+      <p class="sku">{{ product.variants.first.sku }}</p>
       <p>{{ product.description | strip_html | truncatewords: 8 }}</p>
 
 
@@ -99,7 +100,7 @@
       <a href="{{ product.url | within: collection }}">
           <span class="input-group-btn">
               <div class="btn btn--full arrow-after">SHOP NOW &nbsp; &nbsp;
-              <i class="fa fa-chevron-right"></i>
+              <i class="ion-ios-arrow-forward"></i>
               </div>
           </span>
       </a>

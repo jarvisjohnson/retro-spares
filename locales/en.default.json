@@ -13,9 +13,9 @@
       "home_link_title": "Back to the frontpage"
     },
     "newsletter_form": {
-      "newsletter_email": "your@email.com",
+      "newsletter_email": "Email Address",
       "submit": "Sign Up",
-      "confirmation": "Thanks for subscribing"
+      "confirmation": "Thanks for subscribing!"
     },
     "search": {
       "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
@@ -257,10 +257,10 @@
     },
     "footer": {
       "social_title": "Follow us",
-      "newsletter_title": "Newsletter",
-      "first-menu-title": "Information",
-      "second-menu-title": "Why buy from us",
-      "accepted_payments": "Accepted Payments"
+      "newsletter_title": "Sign Up To Our Mailing List",
+      "first-menu-title": "Online Shopping",
+      "second-menu-title": "Terms & Conditions",
+      "accepted_payments": "Get in Touch"
     }
   },
   "products": {
