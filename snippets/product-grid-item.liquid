@@ -54,47 +54,10 @@
   <p class="h4">
     <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
   </p>
-  <p class="sku">{{ product.variants.first.sku }}</p>
-  <p>
-  Suitable for:
-  </p>
-  <p class="h6">
-  {{ product.tags | join: ', ' 
-  | remove: ', Ford' | remove: 'Ford, ' | remove: 'Ford, '
-  | remove: ', Holden' | remove: 'Holden, ' | remove: 'Holden, ' 
-  | remove: ', Daewoo' | remove: 'Daewoo, ' | remove: 'Daewoo, '
-  | remove: ', Toyota' | remove: 'Toyota, ' | remove: 'Toyota, '
-  | remove: ', BMW' | remove: 'BMW, ' | remove: 'BMW, ' 
-  | remove: ', Volkswagen' | remove: 'Volkswagen, ' | remove: 'Volkswagen, '
-  | remove: ', Mitsubishi' | remove: 'Mitsubishi, ' | remove: 'Mitsubishi, ' 
-  | remove: ', Nissan' | remove: 'Nissan, ' | remove: 'Nissan, '
-  | remove: ', Valiant' | remove: 'Valiant, ' | remove: 'Valiant, '
-  | remove: ', Rover' | remove: 'Rover, '  | remove: 'Rover, '   
-  | remove: ', Subaru' | remove: 'Subaru, ' | remove: 'Subaru, '
-  | remove: ', Honda' | remove: 'Honda, '  | remove: 'Honda, '
-  | remove: ', Hyundai' | remove: 'Hyundai, ' | remove: 'Hyundai, '
-  | remove: ', Suzuki' | remove: 'Suzuki, ' | remove: 'Suzuki, '
-  | remove: ', Jeep' | remove: 'Jeep, '  | remove: 'Jeep, '
-  | remove: ', Mazda' | remove: 'Mazda, ' | remove: 'Mazda, '
-  | remove: ', Daihatsu' | remove: 'Daihatsu, '  | remove: 'Daihatsu, '
-  | remove: ', Daewoo' | remove: 'Daewoo, ' | remove: 'Daewoo, '
-  | remove: ', Morris' | remove: 'Morris, ' | remove: 'Morris, '
-  | remove: ', Studebaker' | remove: 'Studebaker, '   | remove: 'Studebaker, ' 
-  | remove: ', Vauxhall' | remove: 'Vauxhall, '   | remove: 'Vauxhall, '    
-  }}
-  {% comment %}
-    {% for tag in product.tags %}
-      {% capture this_tag %}{{ tag | downcase }}{% endcapture %}
-          {% if this_tag != 'ford'  %}
-          <span>
-            {{ tag }}
-          </span>
-          <span class="comma">,</span>
-        {% else %}
-        {% endif %}
-    {% endfor %}
-  {% endcomment %}
-  </p>
+  <p class="sku">SKU: {{ product.variants.first.sku }}</p>
+
+  {% include  'product-suitable-makes' %}
+  
   <a href="{{ product.url | within: collection }}" class="grid__image">
     <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
   </a>

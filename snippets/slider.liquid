@@ -9,7 +9,7 @@ Shows hero Slider on homepage
     <div data-slick='{"slidesToShow": 1, "slidesToScroll": 1}' class="slides">
         {% if settings.homepage_slide_show_1 %}
             <div data-id="1">
-                <a href="{{ settings.homepage_slide_title_1 }}" class="vac">
+                <a href="{{ shop.url}}/collections/{{ settings.homepage_slide_link_1 }}" class="vac">
                 <img src="{{ 'homepage_slide_image_1.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_1 }}"/>
                     <span class="slider-text">
                         <h1>{{ settings.homepage_slide_title_1 }}</h1>
@@ -20,7 +20,7 @@ Shows hero Slider on homepage
         {% endif %}
         {% if settings.homepage_slide_show_2 %}
             <div data-id="2">
-                <a href="{{ settings.homepage_slide_title_2 }}" class="vac">
+                <a href="{{ shop.url}}/collections/{{ settings.homepage_slide_link_2 }}" class="vac">
                 <img src="{{ 'homepage_slide_image_2.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_2 }}"/>
                     <span class="slider-text">
                         <h1>{{ settings.homepage_slide_title_2 }}</h1>
@@ -31,7 +31,7 @@ Shows hero Slider on homepage
         {% endif %}
         {% if settings.homepage_slide_show_3 %}
             <div data-id="3">
-                <a href="{{ settings.homepage_slide_title_3 }}" class="vac">
+                <a href="{{ shop.url}}/collections/{{ settings.homepage_slide_link_3 }}" class="vac">
                 <img src="{{ 'homepage_slide_image_3.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_3 }}"/>
                     <span class="slider-text">
                         <h1>{{ settings.homepage_slide_title_3 }}</h1>
@@ -42,7 +42,7 @@ Shows hero Slider on homepage
         {% endif %}
         {% if settings.homepage_slide_show_4 %}
             <div data-id="4">
-                <a href="{{ settings.homepage_slide_title_4 }}" class="vac">
+                <a href="{{ shop.url}}/collections/{{ settings.homepage_slide_link_4 }}" class="vac">
                 <img src="{{ 'homepage_slide_image_4.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_4 }}"/>
                     <span class="slider-text">
                         <h1>{{ settings.homepage_slide_title_4 }}</h1>
@@ -53,7 +53,7 @@ Shows hero Slider on homepage
         {% endif %}
         {% if settings.homepage_slide_show_5 %}
             <div data-id="5">
-                <a href="{{ settings.homepage_slide_title_5 }}" class="vac">
+                <a href="{{ shop.url}}/collections/{{ settings.homepage_slide_link_5 }}" class="vac">
                 <img src="{{ 'homepage_slide_image_5.jpg' | asset_url }}" alt="{{ settings.homepage_slide_title_5 }}"/>
                     <span class="slider-text">
                         <h1>{{ settings.homepage_slide_title_5 }}</h1>

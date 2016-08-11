@@ -13,34 +13,9 @@
 {% comment %}
   Use .grid--rev so that the collection tags appear below the products on mobile
 {% endcomment %}
-<div class="grid--rev">
+<div class="grid">
   
-  <div class="grid__item large--one-whole">
-
-    {% comment %}
-      Different markup if a collection description exists
-    {% endcomment %}
-      <header class="section-header">
-        <h1 class="section-header__title section-header__left">{{ collection.title }}</h1>
-            <ul class="clearfix filters">
-              <li class="clearfix filter">
-                {% assign tags = 'Ford, Holden, Toyota, BMW, Daewoo, Volkswagen, Mitsubishi, Nissan, Valiant, Rover, Subaru, Honda, Hyundai, Suzuki, Jeep, Mazda, Daihatsu, Morris, Studebaker, Vauxhall, ALFETTA, ALFA, AUSTIN, CHEVROLET, CHRYSLER/MITSUBISHI, DATSUN/NISSAN, NISSAN/DATSUN, FIAT, HILLMAN, HONDA, HUMMER, HYUNDAI, JAGUAR, KIA, LEYLAND, LADA, MERCEDES-BENZ, PEUGEOT, RAMBLER, RENAULT, SAAB, SUZUKI, TRIUMPH, VOLVO, FORD, HOLDEN, TOYOTA, BMW, DAEWOO, VOLKSWAGEN, MITSUBISHI, NISSAN, VALIANT, ROVER, SUBARU, HONDA, HYUNDAI, SUZUKI, JEEP, MAZDA, DAIHATSU, MORRIS, STUDEBAKER, VAUXHALL, Alfetta, Alfa, Austin, Chevrolet, Chrysler/Mitsubishi, Datsun/Nissan, Nissan/Datsun, Fiat, Hillman, Honda, Hummer, Hyundai, Jaguar, Kia, Leyland, Lada, Mercedes-benz, Peugeot, Rambler, Renault, Saab, Suzuki, Triumph, Volvo' | split: ',' %}
-                <h4 style="display:inline-block">Choose your Vehicle Make:</h4>
-                <select class="coll-filter">
-                  <option value="">All</option>
-                  {% for t in tags %}
-                  {% assign tag = t | strip %}
-                  {% if current_tags contains tag %}
-                  <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-                  {% elsif collection.all_tags contains tag %}
-                  <option value="{{ tag | handle }}">{{ tag }}</option>
-                  {% endif %}
-                  {% endfor %}
-                </select>
-              </li>
-            </ul>
-        </header>
-  </div>
+{% include 'collection-sidebar' %}
 
   <div class="grid__item large--one-whole">
 

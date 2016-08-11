@@ -45,6 +45,7 @@
         <hr class="hr--clear">
 
         <div class="grid-uniform">
+          <!-- begin list search results-->
           {% for item in search.results %}
             {% comment %}
               Check if the product is on sale and set a variable to be used below.
@@ -63,7 +64,6 @@
             {% endif %}
 
             {% if grid_results == false %}
-              <!-- begin list search results-->
               <div class="grid__item">
                 <div class="grid">
                   {% if item.featured_image %}
@@ -83,7 +83,7 @@
                   <div class="grid__item two-thirds {% unless item.featured_image %}push--one-third{% endunless %}">
                     <h3>{{ item.title | link_to: item.url }}</h3>
 
-                      <p class="sku">{{ product.variants.first.sku }}</p>
+                      <p class="sku">SKU: {{ item.variants.first.sku }}</p>
 
                     {% if item.price %}
                       <p>
@@ -136,7 +136,7 @@
 
                 <h5>{{ item.title | link_to: item.url }}</h5>
 
-                  <p class="sku">{{ product.variants.first.sku }}</p>
+                      <p class="sku">SKU: {{ item.variants.first.sku }}</p>
 
                 {% if item.price %}
                   <p>

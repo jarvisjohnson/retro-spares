@@ -55,6 +55,10 @@
 
       <h1 itemprop="name">{{ product.title }}</h1>
 
+        <p class="sku">SKU: {{ product.variants.first.sku }}</p>
+
+        {% include  'product-suitable-makes' %}
+
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <meta itemprop="priceCurrency" content="{{ shop.currency }}">
 
