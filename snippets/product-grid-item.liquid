@@ -54,7 +54,7 @@
   <p class="h4">
     <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
   </p>
-  <p class="sku">SKU: {{ product.variants.first.sku }}</p>
+  <p class="sku">{{ product.variants.first.sku }}</p>
 
   {% include  'product-suitable-makes' %}
   

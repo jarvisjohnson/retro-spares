@@ -28,7 +28,7 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
-    {{ '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' | stylesheet_tag }}
+    {{ 'ionicons.min.css' | asset_url | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css' | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css' | stylesheet_tag }}
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
@@ -383,7 +383,7 @@
       <div class="grid">
       {% unless template contains 'account' or template contains 'cart' %}
         <div class="grid__item large--one-quarter medium--one-whole collection-nav">
-          {% include 'collections-menu' %}
+          {% include 'sidebar-menu' %}
           {% include 'best-sellers' %}
         </div>
         {% endunless %}

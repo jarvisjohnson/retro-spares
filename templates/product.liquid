@@ -55,7 +55,7 @@
 
       <h1 itemprop="name">{{ product.title }}</h1>
 
-        <p class="sku">SKU: {{ product.variants.first.sku }}</p>
+        <p class="sku">{{ product.variants.first.sku }}</p>
 
         {% include  'product-suitable-makes' %}
 

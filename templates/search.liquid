@@ -83,7 +83,7 @@
                   <div class="grid__item two-thirds {% unless item.featured_image %}push--one-third{% endunless %}">
                     <h3>{{ item.title | link_to: item.url }}</h3>
 
-                      <p class="sku">SKU: {{ item.variants.first.sku }}</p>
+                      <p class="sku">{{ item.variants.first.sku }}</p>
 
                     {% if item.price %}
                       <p>
@@ -136,7 +136,7 @@
 
                 <h5>{{ item.title | link_to: item.url }}</h5>
 
-                      <p class="sku">SKU: {{ item.variants.first.sku }}</p>
+                      <p class="sku">{{ item.variants.first.sku }}</p>
 
                 {% if item.price %}
                   <p>

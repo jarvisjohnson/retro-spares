@@ -63,7 +63,7 @@
           {% assign sold_out = false %}
         {% endif %}
 
-        <div class="grid__item">
+        <div class="grid__item grid-list-item">
 
           {% comment %}
             Link to your product with the 'within: collection' filter for the link to be aware of the collection.
@@ -82,11 +82,11 @@
                 <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" class="grid__image">
               </a>
             </div>
-            <div class="grid__item large--four-fifths large--display-table-cell medium--two-thirds">
+            <div class="grid__item large--four-fifths large--display-table-cell medium--two-thirds grid-list">
               <div class="grid">
                 <div class="grid__item large--three-quarters medium--two-thirds">
                   <p class="h6">{{ product.title }}</p>
-                  <p class="sku">SKU: {{ product.variants.first.sku }}</p>
+                  <p class="sku">{{ product.variants.first.sku }}</p>
 
                     {% include  'product-suitable-makes' %}
 

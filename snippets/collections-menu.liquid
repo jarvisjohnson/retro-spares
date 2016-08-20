@@ -1,4 +1,4 @@
-<!-- /snippets/collections-menu.liquid -->
+<!-- /snippets/sidebar-menu.liquid -->
 {% comment %}
 
   Side nav that shows up on all page on the left hand side and lists the collections as a menu
@@ -14,7 +14,7 @@
 		Browse By:
 		</li>
 
-  		{% for link in linklists.side-menu-collections.links %}
+  		{% for link in linklists.sidebar-menu.links %}
 	    {% assign child_list_handle = link.title | handle %}
 	    {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
 	    <li class="has-dropdown">
