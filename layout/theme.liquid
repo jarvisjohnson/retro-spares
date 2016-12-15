@@ -28,7 +28,7 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
-    {{ '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' | stylesheet_tag }}
+    {{ 'ionicons.min.css' | asset_url | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css' | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css' | stylesheet_tag }}
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
@@ -297,14 +297,14 @@
             {% endif %}
           </div>
           <div class="grid__item large--one-quarter large--text-center medium-down--hide flex v-center">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
+            <a href="https://goo.gl/maps/4q7jECyxaQu" target="_blank" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
               <i class="ion-ios-location-outline header-icon"></i>
               {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
              </a> 
           </div>
           <div class="grid__item large--one-quarter large--text-center medium-down--hide flex v-center">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
-              <i class="ion-ios-telephone-outline header-icon"></i>          
+            <a href="tel:{{ shop.phone }}" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
+              <i class="ion-ios-telephone-outline header-icon" style="transform: rotate(45deg)"></i>          
               {{ shop.phone }} 
             </a>
           </div>
@@ -709,14 +709,14 @@
               {% endif %}
             </div>
             <div class="grid__item large--one-quarter large--text-center medium--one-half flex v-center med-pad">
-              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
+              <a href="https://goo.gl/maps/4q7jECyxaQu" target="_blank" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
                 <i class="ion-ios-location-outline header-icon"></i>
                 {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
                </a> 
             </div>
             <div class="grid__item large--one-quarter large--text-center medium--one-half flex v-center med-pad">
-              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
-                <i class="ion-ios-telephone-outline header-icon"></i>          
+              <a href="tel:{{ shop.phone }}" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
+                <i class="ion-ios-telephone-outline header-icon" style="transform: rotate(45deg)"></i>         
                 {{ shop.phone }} 
               </a>
             </div>

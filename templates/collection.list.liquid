@@ -22,40 +22,21 @@
 {% comment %}
   Use .grid--rev so that the collection tags appear below the products on mobile
 {% endcomment %}
-<div class="grid--rev">
-
-  <div class="grid__item large--one-whole">
-  {% comment %}
-    {% include 'collection-sidebar' %}
-  {% endcomment %}
-  </div>
+<div class="grid">
   
+{% include 'collection-sidebar' %}
+
   <div class="grid__item large--one-whole">
 
-    {% comment %}
-      Different markup if a collection description exists
-    {% endcomment %}
-    {% if collection.description != blank %}
       <header class="section-header">
-        <h1 class="section-header__title">{{ collection.title }}</h1>
-        <div class="rte rte--header">
-          {{ collection.description }}
-        </div>
-      </header>
-      <hr>
-      <div class="section-header">
-        <div class="section-header__right">
-          {% include 'collection-sorting' %}
-        </div>
-      </div>
-    {% else %}
-      <header class="section-header">
-        <h1 class="section-header__title section-header__left">{{ collection.title }}</h1>
         <div class="section-header__right">
           {% include 'collection-sorting' %}
         </div>
       </header>
-    {% endif %}
+
+  </div>      
+
+    <div class="grid__item large--one-whole">
 
     {% comment %}
       Use class grid-uniform to have evenly sized columns clear
@@ -82,7 +63,7 @@
           {% assign sold_out = false %}
         {% endif %}
 
-        <div class="grid__item">
+        <div class="grid__item grid-list-item">
 
           {% comment %}
             Link to your product with the 'within: collection' filter for the link to be aware of the collection.
@@ -101,10 +82,14 @@
                 <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" class="grid__image">
               </a>
             </div>
-            <div class="grid__item large--four-fifths large--display-table-cell medium--two-thirds">
+            <div class="grid__item large--four-fifths large--display-table-cell medium--two-thirds grid-list">
               <div class="grid">
                 <div class="grid__item large--three-quarters medium--two-thirds">
                   <p class="h6">{{ product.title }}</p>
+                  <p class="sku">{{ product.variants.first.sku }}</p>
+
+                    {% include  'product-suitable-makes' %}
+
                   <div class="rte">
                     <p>{{ product.content | strip_html | truncatewords: 30 }}</p>
                   </div>

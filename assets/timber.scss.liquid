@@ -1012,7 +1012,7 @@ hr {
 /*================ Section Headers ================*/
 .section-header {
   margin-bottom: $gutter / 3;
-  padding-bottom: $gutter / 6;
+  padding-bottom: $gutter / 3;
   border-bottom: 1px $colorPrimary solid;
 }
 
@@ -1027,7 +1027,7 @@ hr {
   }
 
   .section-header__left {
-    display: table-cell;
+    // display: table-cell;
     vertical-align: middle;
     margin-bottom: 0;
 
@@ -1312,6 +1312,14 @@ ol.alpha { list-style: lower-alpha outside; }
 nav *{
   list-style: none;
   margin: 0;
+}
+.grid-list-item{
+  padding-top: $gutter / 2;
+}
+
+.grid-list{
+  border-bottom: 1px solid $colorBorder;
+  margin-bottom: $gutter / 2;
 }
 
 /*================ Collections Navigation Items ================*/
@@ -1862,7 +1870,7 @@ label.error {
     display: inline-block;
   }
 }
-.nav-bar .icon-fallback-text .icon {
+.nav-bar .icon-fallback-text .icon, .ion-android-menu, .ion-ios-cart-outline {
     @include at-query ($max, $medium) {
       font-size: 2em; 
     }
@@ -2106,9 +2114,9 @@ position: absolute;
     left: 29px;
     color: #000000;
     @include at-query ($max, $medium) {
-      left: 14px;
-      font-size: .4em;
-      top: 9px;
+    left: -15px;
+    font-size: .6em;
+    top: 3px;
     }
 }
 /*============================================================================
@@ -2716,16 +2724,26 @@ footer h3{
   font-weight: bold;
 }
 .filters { list-style-type: none; }
-.filter { float: left; margin-right: 15px; }
+.filter { float: left; margin-right: 15px; width:100%; }
 .filter label { display: inline-block; margin: 10px 0; }
-.filter select { max-width: 200px; }
+// .filter select { max-width: 200px; }
 
 ul.clearfix.filters {    
   display: inline-block;
   vertical-align: middle;
   margin: 0;
+  padding: $gutter;
+  width:100%;
+    @include at-query ($max, $medium) {
+    padding: $gutter 0;
+    }
 }
-
+#make-filter{
+  width: 50%;
+  @include at-query ($max, $medium) {
+    width: 100%;
+    }
+}
 /*============================================================================
   #Breadcrumbs
 ==============================================================================*/

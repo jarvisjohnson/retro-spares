@@ -9,125 +9,26 @@
   to a standalone collection page. E.g. /collections/vendors?q=Pepsi
 
 {% endcomment %}
+  <div class="grid__item large--one-whole">
 
-{% comment %}
-  Product tags in the current collection
-{% endcomment %}
-{% if collection.all_tags.size > 0 %}
-  <h3>{{ 'collections.sidebar.tags' | t }}</h3>
-
-  {% comment %}
-    To provide a 'catch-all' link at the top of the list,
-    check against the collection.handle, product type, and vendor.
-  {% endcomment %}
-  <ul class="no-bullets">
-    <li{% unless current_tags %} class="filter--active"{% endunless %}>
-
-      {% comment %}
-        Good for /collections/all collection and regular collections
-      {% endcomment %}
-      {% if collection.handle %}
-        <a href="/collections/{{ collection.handle }}">
-          {{ 'collections.general.all_of_collection' | t: collection: collection.title }}
-
-
-
-        </a>
-
-                  This is a General Colleciton i.e. Ford
-
-      {% comment %}
-        Good for automatic type collections
-      {% endcomment %}
-      {% elsif collection.current_type %}
-        <a href="{{ collection.current_type | url_for_type }}">
-          {{ 'collections.general.all_of_collection' | t: collection: collection.title }}
-
-
-
-        </a>
-
-          This is a Collection Type Page i.e. Windshield Wipers
-
-      {% comment %}
-        Good for automatic vendor collections
-      {% endcomment %}
-      {% elsif collection.current_vendor %}
-        <a href="{{ collection.current_vendor | url_for_vendor }}">
-          {{ 'collections.general.all_of_collection' | t: collection: collection.title }}
-
-
-
-        </a>
-
-                  This is a vendor page
-      {% endif %}
-    </li>
-
-    {% comment %}
-      And for the good stuff, loop through the tags themselves.
-    {% endcomment %}
-    {% for tag in collection.all_tags %}
-      {% if current_tags contains tag %}
-        <li class="filter--active">
-          {{ tag | link_to_remove_tag: tag }}
-        </li>
-      {% else %}
-        <li>
-          {% comment %}
-            Use link_to_add_tag if you want to allow filtering
-            by multiple tags
-          {% endcomment %}
-          {{ tag | link_to_tag: tag }}
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-{% endif %}
-
-  {% comment %}
-      https://help.shopify.com/themes/customization/collections/filter-collections-with-product-tags
-  {% endcomment %}
-
-<div class="clearfix filter">
-  <p>Browse by Model:</p>
-  <select class="coll-filter">
-    <option value="">All</option>
-    {% for tag in collection.all_tags %}
-    {% capture this_tag %}{{ tag | downcase }}{% endcapture %}
-    {% if current_tags contains tag %}
-    <option value="{{ tag | handle }}" selected>{{ tag }}</option>
-    {% elsif this_tag == collection.handle %}
-    {% else %}
-    <option value="{{ tag | handle }}">{{ tag }}</option>
-    {% endif %}
-    {% endfor %}
-  </select>
-</div>
-
-
-<script>
-  /* Product Tag Filters - Good for any number of filters on any type of collection pages */
-  var collFilters = jQuery('.coll-filter');
-  collFilters.change(function() {
-    var newTags = [];
-    collFilters.each(function() {
-      if (jQuery(this).val()) {
-        newTags.push(jQuery(this).val());
-      }
-    });
-    if (newTags.length) {
-      var query = newTags.join('+');
-      window.location.href = jQuery('{{ 'tag' | link_to_tag: 'tag' }}').attr('href').replace('tag', query);
-    }
-    else {
-      {% if collection.handle %}
-      window.location.href = '/collections/{{ collection.handle }}';
-      {% elsif collection.products.first.type == collection.title %}
-      window.location.href = '{{ collection.title | url_for_type }}';
-      {% elsif collection.products.first.vendor == collection.title %}
-      window.location.href = '{{ collection.title | url_for_vendor }}';
-      {% endif %}
-    }
-  });
-</script>
+      <header class="section-header">
+        <h1 class="section-header__title section-header__left">{{ collection.title }}</h1>
+            <ul class="clearfix filters">
+              <li class="clearfix filter">
+                {% assign tags = 'Ford, Holden, Toyota, BMW, Daewoo, Volkswagen, Mitsubishi, Nissan, Valiant, Rover, Subaru, Honda, Hyundai, Suzuki, Jeep, Mazda, Daihatsu, Morris, Studebaker, Vauxhall, ALFETTA, ALFA, AUSTIN, CHEVROLET, CHRYSLER/MITSUBISHI, DATSUN/NISSAN, NISSAN/DATSUN, FIAT, HILLMAN, HONDA, HUMMER, HYUNDAI, JAGUAR, KIA, LEYLAND, LADA, MERCEDES-BENZ, PEUGEOT, RAMBLER, RENAULT, SAAB, SUZUKI, TRIUMPH, VOLVO, FORD, HOLDEN, TOYOTA, BMW, DAEWOO, VOLKSWAGEN, MITSUBISHI, NISSAN, VALIANT, ROVER, SUBARU, HONDA, HYUNDAI, SUZUKI, JEEP, MAZDA, DAIHATSU, MORRIS, STUDEBAKER, VAUXHALL, Alfetta, Alfa, Austin, Chevrolet, Chrysler/Mitsubishi, Datsun/Nissan, Nissan/Datsun, Fiat, Hillman, Honda, Hummer, Hyundai, Jaguar, Kia, Leyland, Lada, Mercedes-benz, Peugeot, Rambler, Renault, Saab, Suzuki, Triumph, Volvo' | split: ',' %}
+                <h4>Choose your Vehicle Make:</h4>
+                <select class="coll-filter" id="make-filter">
+                  <option value="">All</option>
+                  {% for t in tags %}
+                  {% assign tag = t | strip %}
+                  {% if current_tags contains tag %}
+                  <option value="{{ tag | handle }}" selected>{{ tag }}</option>
+                  {% elsif collection.all_tags contains tag %}
+                  <option value="{{ tag | handle }}">{{ tag }}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+              </li>
+            </ul>
+        </header>
+  </div>
