@@ -1,0 +1,42 @@
+
+/* Large Navigation Font */
+.nav-header ul.site-nav li a, .nav-header ul.site-nav--mobile li a {
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    vertical-align: middle;
+    display: inline-block;
+    text-transform: none;
+    font-size: 14px;
+    border-top: none;
+    padding: 7px 0;
+    font-family: Arial,sans-serif;
+    font-weight: bold;
+    line-height: 14px;
+    /* text-transform: uppercase; */
+    line-height: 17px;
+}
+
+
+/* Product Font Size Change */
+
+.grid__item.large--one-quarter.medium--one-third {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+
+/* Header Cta Larger Font */
+a.site-header__cart-toggle.js-drawer-open-right.flex.v-center {
+    font-size: 21px;
+    line-height: 23px;
+}
+
+.header-icon {
+    font-size: 3em;
+    padding: 0 15px;
+    font-size: 2.0em;
+}
+
+
