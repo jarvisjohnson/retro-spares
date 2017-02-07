@@ -175,15 +175,17 @@
     }
   });
   jQuery(document).ready(function() {
-     console.log('window loaded');
     if (jQuery('#make-filter').val()){
-      console.log('has value');
-      $('#model-filter').fadeIn(200);
+      jQuery('#model-filter').show();
     } else {
-      console.log('does not have value');
-      $('#model-filter').fadeOut(200);
+      jQuery('#model-filter').hide();
+    };
+    if (jQuery('#model-filter select').val() == ''){
+      jQuery('#all-reset').text('All');
+    } else{
+      jQuery('#all-reset').text('Reset Filter');
     }
-  });    
+  });
   var collFilters = jQuery('.coll-filter');
   collFilters.change(function() {
     delete Shopify.queryParams.page;
