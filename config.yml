@@ -1,18 +1,18 @@
----
-:api_key: 3280ffb018aa04701751662d93488378
-:password: ed017a6c7167f977c29a8920c216abc0
-:store: retro-spares.myshopify.com
-:theme_id: 120051651
-:whitelist_files:
-- layout/
-- assets/
-- config/
-- snippets/
-- templates/
-- locales/
-:ignore_files:
-- assets/"*.jpg"
-- assets/"*.jpeg"
-- assets/"*.gif"
-- assets/"*.png"
-- config/settings_data.json
+development:
+  password: ed017a6c7167f977c29a8920c216abc0
+  theme_id: "165973774"
+  store: retro-spares.myshopify.com
+  timeout: 30s
+  whitelist_files:
+    - layout/
+    - assets/
+    - config/
+    - snippets/
+    - templates/
+    - locales/
+  ignore_files:
+    - assets/"*.jpg"
+    - assets/"*.jpeg"
+    - assets/"*.gif"
+    - assets/"*.png"
+    - config/settings_data.json

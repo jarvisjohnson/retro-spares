@@ -68,8 +68,11 @@ each other properly at each breakpoint.
                     {% if link.object.image.src %}
                     <!-- collection image -->
                       <img src="{{ link.object.image.src | collection_img_url: 'large' }}" alt="{{ link.title | escape }}" />
+                    {% elsif link.type == "page_link" %}
+                    <!-- if it links to a page, get the image from that page -->
+                        {{ collection.content }}
                     {% else %}
-                      <!-- if there's no collection image, show the first product image instead -->
+                      <!-- if there's no collection image or page image, show the first product image instead -->
                       <img src="{{ link.object.products.first.featured_image | product_img_url: 'large' }}" alt="{{ link.title | escape }}" />
                     {% endif %}
                     

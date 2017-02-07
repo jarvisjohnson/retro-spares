@@ -1,7 +1,7 @@
 <!-- /templates/page.make.liquid -->
 {% comment %}
 
-  This template shows each product type as a subtype of each car make
+  This is the page that shows all car makes as collections
 
   More info on global variables (available on all templates):
     - http://docs.shopify.com/themes/liquid-variables/global
@@ -9,6 +9,11 @@
 
 {% include 'breadcrumb' %}
 {% capture make %}{{page.handle}}{% endcapture %}
+{% assign stored_linklist = linklists.[make].links %}
+{% comment %}
+Use class grid-uniform to have evenly sized columns clear
+each other properly at each breakpoint.
+{% endcomment %}
 
 <div class="grid-uniform flex wrap">
 
@@ -24,20 +29,13 @@
   {% assign index = 1 %}
   {% assign isEmpty = true %}
 
-  {% for link in linklists.product-types.links %}
+  {% for link in stored_linklist %}
     {% assign collection = link.object %}
-
-  {% comment %}Here we only show a collection link if if has products, or the link is actaully to a page, where we can't determine if it has a product.  Then we hide it with CSS if we don't want to feature that collection{% endcomment %}
-
-    {% assign productsNum = collection.all_products_count %}
-    {% assign linkType = link.type %}
-    {% capture linkClass %}{{ collection.handle }} {{make}}{% endcapture %}
-      {% if productsNum > 0 or linkType == "page_link" %}
 
         {% assign isEmpty = false %}
         {% assign collection_item_width = 'large--one-half medium--one-half small--one-whole' %}
-        <div class="grid__item {{ collection_item_width }} text-left flex wrap half-pad hider {{ linkClass }}">
-            <div class="grey card flex wrap">
+        <div class="grid__item {{ collection_item_width }} text-left flex wrap half-pad">
+            <div class="grey card flex wrap" style="max-width:100%">
               <div class="grid-uniform">
                 {% comment %}
                   Use capture to put the collection title in a variable that is used in liquid filters
@@ -45,19 +43,20 @@
                 {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
 
                 <div class="grid__item {{ collection_item_width }} text-left higher">
-                  <H2 class="upper"><a class="word_split" href="{{ link.url }}/{{ make }}" title="Browse our {{ link.object.title | escape }}">{{ make }} {{ link.title }}</a></H2>
+                  <H2 class="upper">
+                    <a class="word_split" href="{{ link.url }}" title="Browse our {{ link.object.title | escape }}">
+                      {{ link.title }}
+                    </a>
+                  </H2>
 
 
                 </div>
 
                 <div class="grid__item {{ collection_item_width }} text-left">
-                  <a href="{{ link.url }}/{{ make }}" title="Browse our {{ link.title | escape }} ">
+                  <a href="{{ link.url }}" title="Browse our {{ link.title | escape }} ">
                     {% if link.object.image.src %}
                     <!-- collection image -->
                       <img src="{{ link.object.image.src | collection_img_url: 'large' }}" alt="{{ link.title | escape }}" />
-                    {% elsif link.type == "page_link" %}
-                    <!-- if it links to a page, get the image from that page -->
-                        {{ collection.content }}
                     {% else %}
                       <!-- if there's no collection image, show the first product image instead -->
                       <img src="{{ link.object.products.first.featured_image | product_img_url: 'large' }}" alt="{{ link.object.title | escape }}" />
@@ -66,7 +65,7 @@
                   </a>
                 </div>
 
-                <a href="{{ link.url }}/{{ make }}" title="Browse our {{ link.title | escape }}" class="product-hover--btn">
+                <a href="{{ link.url }}" title="Browse our {{ link.title | escape }}" class="product-hover--btn">
                   <span class="input-group-btn">
                       <div class="btn btn--full arrow-after">SHOP NOW &nbsp; &nbsp;
                       <i class="ion-ios-arrow-forward"></i></div>
@@ -77,9 +76,6 @@
             </div>
         </div>
         {% assign index = index | plus: 1 %}
-
-
-      {% endif %}
 
   {% endfor %}
 

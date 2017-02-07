@@ -25,10 +25,10 @@
     <div class="grid__item large--one-half text-center">
       <div class="product-single__photos" id="ProductPhoto">
         {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
-        <a href="{{ product.featured_image | product_img_url: 'original' }}" class="MagicZoom" id="zoom" title="{{ product.title | escape }}">{{ product.featured_image | product_img_url: 'master' | img_tag }}</a>
+        <a href="{{ product.featured_image | product_img_url: 'original' }}" class="MagicZoom" id="zoom" title="{{ product.title | escape }}">{{ product.featured_image | product_img_url: 'medium' | img_tag }}</a>
         {% if product.images.size > 1 %}
           {% for image in product.images %}
-          <a href="{{ image | product_img_url: 'original' }}" rev="{{ image | product_img_url: 'master' }}" rel="zoom-id:zoom"><img src="{{ image | product_img_url: 'small'}}" alt="{{product.title | escape }}"/></a>
+          <a href="{{ image | product_img_url: 'original' }}" rev="{{ image | product_img_url: 'medium' }}" rel="zoom-id:zoom"><img src="{{ image | product_img_url: 'small'}}" alt="{{product.title | escape }}"/></a>
           {% endfor %}
         {% endif %}
       </div>
@@ -53,7 +53,7 @@
 
     <div class="grid__item large--one-half">
 
-      <h2 itemprop="name">{{ product.title }}</h2>
+      <h1 itemprop="name">{{ product.title }}</h1>
 
         <p class="sku">{{ product.variants.first.sku }}</p>
 
@@ -122,12 +122,8 @@
         </form>
 
       </div>
-        
-      </div>
-    </div>
-    
-    <div class="grid__item large--one-whole">        
-<div class="product-description rte" itemprop="description">
+
+      <div class="product-description rte" itemprop="description">
         {{ product.description }}
       </div>
 
@@ -152,9 +148,10 @@
         {% endif %}
       {% endif %}
 
-        </div>
+    </div>
+  </div>
 
-
+</div>
 
 {% comment %}
   To take advantage of a callback on the select dropdown, add option_selection.js
@@ -199,4 +196,64 @@
       $('.selector-wrapper').hide();
     {% endif %}
   });
+</script>
+  
+  
+<script>
+// To change what your customers would see if they try to
+// add to cart without completing an option, edit the yellow text enclosed within the quotation marks.
+var errorMessages = {
+  for_text_inputs  : "Please add your personalized text before adding to cart.",
+  for_number_inputs: "Please enter a custom quantity.",
+  for_checkboxes   : "Please select your options before adding to cart",
+  for_dropdowns    : "Please select an option before adding to cart"
+};
+jQuery("form[action='/cart/add'] [type=submit]").on("click", function(e) {
+  if (
+    window.Shoppad &&
+    window.Shoppad.apps &&
+    window.Shoppad.apps.customizery &&
+    window.Shoppad.apps.customizery.overrideDeprecatedValidation
+  ) return true;
+
+  $io = $('#infiniteoptions-container');
+  var invalidTextInputs = $io.find("input[type=text][required], textarea[required]").filter(function (idx, el) {
+    return $(el).val() === '';
+  });
+  var invalidNumberInputs = $io.find('input[type=number][required]').filter(function (idx, el) {
+    return $(el).val() === '';
+  });
+  var invalidFieldSets = $io.find('fieldset[data-required=true]').filter(function (idx, fieldSet) {
+    if ($(fieldSet).find('input[type=checkbox]').length === 0) {
+      return false;
+    } else {
+      return $(fieldSet).find('input[type=checkbox]').filter(function (idx, el) {
+        return el.checked === true;
+      }).length === 0;
+    }
+  });
+  var invalidDropdowns = $io.find('select[required]').filter(function (idx, select) {
+    return !select.selectedOptions[0] || select.selectedOptions[0].disabled === true;
+  });
+  
+  var errMsg = '';
+
+  if (invalidTextInputs.length > 0) {
+    errMsg = errorMessages.for_text_inputs;
+  } else if (invalidNumberInputs.length > 0) {
+    errMsg = errorMessages.for_number_inputs;
+  } else if (invalidFieldSets.length > 0) {
+    errMsg = errorMessages.for_number_inputs;
+  } else if (invalidDropdowns.length > 0) {
+    errMsg = errorMessages.for_dropdowns;
+  }
+
+  if (errMsg.length) {
+    alert(errMsg);
+    e.stopImmediatePropagation();
+    return false;
+  }
+
+  return true;
+});
 </script>

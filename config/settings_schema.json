@@ -318,9 +318,9 @@
         "label": "Call to action text"
       },
       {
-        "type": "text",
+        "type": "collection",
         "id": "homepage_slide_link_1",
-        "label": "Call to action URL"
+        "label": "Collection link"
       },
       {
         "type": "header",
@@ -355,9 +355,9 @@
         "label": "Call to action text"
       },
       {
-        "type": "text",
+        "type": "collection",
         "id": "homepage_slide_link_2",
-        "label": "Call to action URL"
+        "label": "Collection link"
       },
       {
         "type": "header",
@@ -392,9 +392,9 @@
         "label": "Call to action text"
       },
       {
-        "type": "text",
+        "type": "collection",
         "id": "homepage_slide_link_3",
-        "label": "Call to action URL"
+        "label": "Collection link"
       },
       {
         "type": "header",
@@ -429,9 +429,9 @@
         "label": "Call to action text"
       },
       {
-        "type": "text",
+        "type": "collection",
         "id": "homepage_slide_link_4",
-        "label": "Call to action URL"
+        "label": "Collection link"
       },
       {
         "type": "header",
@@ -466,9 +466,9 @@
         "label": "Call to action text"
       },
       {
-        "type": "text",
+        "type": "collection",
         "id": "homepage_slide_link_5",
-        "label": "Call to action URL"
+        "label": "Collection link"
       }
     ]
   },

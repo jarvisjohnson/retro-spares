@@ -1,0 +1,63 @@
+<!-- /snippets/product-suitable-makes.liquid -->
+{% comment %}
+
+
+{% endcomment %}
+
+<p>
+  Suitable for:
+  </p>
+  <p class="h6 suitmakes">
+  {{ product.tags | join: ', ' 
+  | remove: ', Ford' | remove: 'Ford, ' | remove: 'Ford, '
+  | remove: ', Holden' | remove: 'Holden, ' | remove: 'Holden, ' 
+  | remove: ', Daewoo' | remove: 'Daewoo, ' | remove: 'Daewoo, '
+  | remove: ', Toyota' | remove: 'Toyota, ' | remove: 'Toyota, '
+  | remove: ', BMW' | remove: 'BMW, ' | remove: 'BMW, ' 
+  | remove: ', Volkswagen' | remove: 'Volkswagen, ' | remove: 'Volkswagen, '
+  | remove: ', Mitsubishi' | remove: 'Mitsubishi, ' | remove: 'Mitsubishi, ' 
+  | remove: ', Nissan' | remove: 'Nissan, ' | remove: 'Nissan, '
+  | remove: ', Valiant' | remove: 'Valiant, ' | remove: 'Valiant, '
+  | remove: ', Rover' | remove: 'Rover, '  | remove: 'Rover, '   
+  | remove: ', Subaru' | remove: 'Subaru, ' | remove: 'Subaru, '
+  | remove: ', Honda' | remove: 'Honda, '  | remove: 'Honda, '
+  | remove: ', Hyundai' | remove: 'Hyundai, ' | remove: 'Hyundai, '
+  | remove: ', Suzuki' | remove: 'Suzuki, ' | remove: 'Suzuki, '
+  | remove: ', Jeep' | remove: 'Jeep, '  | remove: 'Jeep, '
+  | remove: ', Mazda' | remove: 'Mazda, ' | remove: 'Mazda, '
+  | remove: ', Daihatsu' | remove: 'Daihatsu, '  | remove: 'Daihatsu, '
+  | remove: ', Daewoo' | remove: 'Daewoo, ' | remove: 'Daewoo, '
+  | remove: ', Morris' | remove: 'Morris, ' | remove: 'Morris, '
+  | remove: ', Studebaker' | remove: 'Studebaker, '   | remove: 'Studebaker, ' 
+  | remove: ', Alfetta' | remove: 'Alfetta, '   | remove: 'Alfetta, '    
+  | remove: ', Alfa' | remove: 'Alfa, '   | remove: 'Alfa, '    
+  | remove: ', Austin' | remove: 'Austin, '   | remove: 'Austin, '     
+  | remove: ', Chevrolet' | remove: 'Chevrolet, '   | remove: 'Chevrolet, '     
+  | remove: ', Fiat' | remove: 'Fiat, '   | remove: 'Fiat, '     
+  | remove: ', Hillman' | remove: 'Hillman, '   | remove: 'Hillman, '     
+  | remove: ', Hummer' | remove: 'Hummer, '   | remove: 'Hummer, '     
+  | remove: ', Jaguar' | remove: 'Jaguar, '   | remove: 'Jaguar, '     
+  | remove: ', Kia' | remove: 'Kia, '   | remove: 'Kia, '     
+  | remove: ', Leyland' | remove: 'Leyland, '   | remove: 'Leyland, '     
+  | remove: ', Lada' | remove: 'Lada, '   | remove: 'Lada, '     
+  | remove: ', Mercedes-benz' | remove: 'Mercedes-benz, '   | remove: 'Mercedes-benz, '     
+  | remove: ', Peugeot' | remove: 'Peugeot, '   | remove: 'Peugeot, '     
+  | remove: ', Rambler' | remove: 'Rambler, '   | remove: 'Rambler, '     
+  | remove: ', Renault' | remove: 'Renault, '   | remove: 'Renault, '     
+  | remove: ', Saab' | remove: 'Saab, '   | remove: 'Saab, '     
+  | remove: ', Triumph' | remove: 'Triumph, '   | remove: 'Triumph, '     
+  | remove: ', Volvo' | remove: 'Volvo, '   | remove: 'Volvo, '        
+  }}
+  {% comment %}
+    {% for tag in product.tags %}
+      {% capture this_tag %}{{ tag | downcase }}{% endcapture %}
+          {% if this_tag != 'ford'  %}
+          <span>
+            {{ tag }}
+          </span>
+          <span class="comma">,</span>
+        {% else %}
+        {% endif %}
+    {% endfor %}
+  {% endcomment %}
+  </p>

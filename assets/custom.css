@@ -1,0 +1,372 @@
+
+/* Large Navigation Font */
+.nav-header ul.site-nav li a, .nav-header ul.site-nav--mobile li a {
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    vertical-align: middle;
+    display: inline-block;
+    text-transform: none;
+    font-size: 14px;
+    border-top: none;
+    padding: 7px 0;
+    font-family: Arial,sans-serif;
+    font-weight: bold;
+    line-height: 14px;
+    /* text-transform: uppercase; */
+    line-height: 17px;
+}
+
+
+/* Product Font Size Change */
+
+.larger-text {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+
+/* Header Cta Larger Font */
+a.site-header__cart-toggle.js-drawer-open-right.flex.v-center {
+    font-size: 21px;
+    line-height: 23px;
+}
+
+.header-icon {
+    font-size: 3em;
+    padding: 0 15px;
+    font-size: 2.0em;
+}
+
+
+ @media screen and (max-device-width: 767px) {
+    .slider-text{
+        font-size: .8em;
+    }
+    #sidebar-nav{
+        display:none;
+    }
+    .template-index #sidebar-nav{
+        display: block;
+    }
+ }
+
+
+form.input-group.search-bar {
+    border: 1px solid #0180af;
+    border-radius: 3px;
+}
+
+.nav-header {
+    background-color: #01a5e2;
+    padding: 2px 0;
+    
+    border-top: 4px solid #001;
+}
+
+.nav-header ul.site-nav li a{
+
+
+	font-size: 16px;
+}
+
+
+.input-group .input-group-field:first-child{
+
+	    font-size: 16px;
+}
+
+
+.site-header a {
+    color: #000;
+    font-size: 20px;
+    line-height: 21px;
+    text-align: left;
+}
+
+#CartCount {
+    top: 5px;
+}
+
+.btn__dark {
+    background-color: #0180af;
+    color: #fff;
+    /* border-right: 1px solid #0180af; */
+    margin-right: -1px;
+}
+
+
+a.lex.v-center {
+    font-size: 20px;
+    line-height: 21px;
+}
+
+.grid--full>.grid__item {
+    font-size: 20px;
+    line-height: 21px;
+}
+
+.h6 {
+    font-size: 24px;
+    color: #333;
+}
+
+.sku {
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+p.h6.suitmakes {
+    font-size: 15px;
+    color: #333;
+}
+
+p.h4 a {
+    font-size: 22px;
+    color: #333;
+}
+
+p.gridprice {
+    font-size: 22px;
+    font-weight: 600;
+/*     padding-top: 10px; */
+    color: #333;
+}
+
+.large--one-fifth {
+    width: 40%;
+}
+
+
+span.word1 {
+    color: #333;
+    font-size: 26px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.word_split span:last-of-type {
+    color: #333;
+    font-size: 26px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+span.word2 {
+    color: #333;
+    font-size: 26px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+span.word3 {
+    color: #333;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+
+.grid__item.large--one-sixth.large--text-right.medium-down--hide.flex.v-center.autocableaus {
+    width: 425px;
+    float: right;
+}
+
+.login__main {
+    float: left;
+    display: inline-block;
+    padding-top: 0px;
+}
+
+.site-header__logo {
+    padding-top: 17px;
+}
+
+a#customer_login_link {
+    font-size: 14px;
+}
+
+a#customer_register_link {
+    font-size: 14px;
+}
+
+
+.card {
+    margin-bottom: 15px;
+    padding: 15px 30px 30px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    margin-bottom: 20px;
+    padding: 10px 16px 20px;
+}
+
+nav#sidebar-nav {
+    position: relative;
+    border-radius: 0px 0px 5px 5px;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    margin-bottom: 20px;
+    padding: 25px 16px 34px;
+}
+
+.nav-header {
+    background-color: #01a5e2;
+    padding: 2px 0;
+    border-top: 3px solid #001;
+    position: relative;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+}
+
+
+i.ion-ios-contact-outline.user-icon {
+    color: #0095da;
+    font-size: 41px;
+}
+
+.login__main.medium-down--hide {
+    margin-top: -9px;
+}
+
+
+/* remove paypal button */
+
+button#paypal-express-button {
+    display: none;
+}
+
+
+/* Font Change Header */
+
+
+.nav-header ul.site-nav li a, .nav-header ul.site-nav--mobile li a {
+
+    font-family: Opensans,sans-serif;
+       font-weight: 600;
+    line-height: 20px;
+}
+
+
+
+/* Slider Shadow And Radius */
+
+.slick-list.draggable {
+    border-radius: 5px;
+}
+
+
+section#HomepageSlideshow {
+    position: relative;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+  
+}
+
+.site-header a {
+    color: #000;
+    font-size: 20px;
+    line-height: 22px;
+    text-align: left;
+    font-weight: 900;
+}
+
+
+h1.section-header__title.section-header__left {
+    text-transform: capitalize;
+    font-weight: 300;
+}
+
+.h6 {
+    font-size: 26px;
+    color: #333;
+    text-transform: capitalize!important;
+    font-weight: 500!important;
+}
+
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    display: block;
+    font-family: Opensans,"HelveticaNeue","Helvetica Neue",Helvetica,sans-serif;
+    font-weight: 400!important;
+    margin: 0 0 0.5em;
+    line-height: 1.2;
+    text-transform: capitalize!important;
+}
+
+li.has-dropdown.categorytitle {
+    font-size: 21px;
+}
+
+
+img#autocableslogo {
+    width: 607px;
+    margin-top: 10px;
+}
+
+
+img#vintageairlogo {
+    margin-top: 20px;
+}
+@media screen and (max-device-width: 767px) {
+
+.site-header__logo a, .site-header__logo img {
+    display: block;
+    width: 150% !important;
+}
+}
+
+.grid-list-item {
+    padding-top: 0px;
+    position: relative;
+    border-radius: 0px 0px 5px 5px;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    margin-bottom: 10px;
+}
+
+.grid__item {
+    padding-left: 34px;
+}
+
+.grid-list {
+    border-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.sku {
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+ul.clearfix.filters {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 8px;
+    width: 100%;
+}
+
+.breadcrumb {
+    margin-bottom: 8px;
+}
+
+.main-section {
+    margin-top: 20px;
+}
+.search-header {
+    background-color: #fff;
+    padding: 0px 0px 7px 0;
+}
+
+@media only screen and (min-width: 769px){
+.autocableaus {
+    padding-left: 75px;
+    /* width: 50%; */
+}
+}

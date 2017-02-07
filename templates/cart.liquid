@@ -41,7 +41,14 @@
 
               {% if settings.cart_vendor_enable %}
                 <p>{{ item.vendor }}</p>
+              
               {% endif %}
+              
+              {% for p in item.properties %}
+	{% unless p.last == blank %}
+		<br /><i>{{p.first}}</i>: {{ p.last }}
+	{% endunless %} 
+{% endfor %}
 
               {% comment %}
                 Optional, loop through custom product line items if available

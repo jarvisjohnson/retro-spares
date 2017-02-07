@@ -22,46 +22,27 @@
 {% comment %}
   Use .grid--rev so that the collection tags appear below the products on mobile
 {% endcomment %}
-<div class="grid--rev">
-
-  <div class="grid__item large--one-whole">
-  {% comment %}
-    {% include 'collection-sidebar' %}
-  {% endcomment %}
-  </div>
+<div class="grid">
   
+{% include 'collection-sidebar' %}
+
   <div class="grid__item large--one-whole">
 
-    {% comment %}
-      Different markup if a collection description exists
-    {% endcomment %}
-    {% if collection.description != blank %}
       <header class="section-header">
-        <h1 class="section-header__title">{{ collection.title }}</h1>
-        <div class="rte rte--header">
-          {{ collection.description }}
-        </div>
-      </header>
-      <hr>
-      <div class="section-header">
-        <div class="section-header__right">
-          {% include 'collection-sorting' %}
-        </div>
-      </div>
-    {% else %}
-      <header class="section-header">
-        <h1 class="section-header__title section-header__left">{{ collection.title }}</h1>
         <div class="section-header__right">
           {% include 'collection-sorting' %}
         </div>
       </header>
-    {% endif %}
+
+  </div>      
+
+    <div class="grid__item large--one-whole">
 
     {% comment %}
       Use class grid-uniform to have evenly sized columns clear
       each other properly at each breakpoint.
     {% endcomment %}
-    <div class="grid-uniform">
+    <div class="grid-uniform products-ajax-wrapper">
 
       <!-- begin product list output -->
       {% for product in collection.products %}
@@ -82,7 +63,7 @@
           {% assign sold_out = false %}
         {% endif %}
 
-        <div class="grid__item">
+        <div class="grid__item grid-list-item product-ajax-wrapper" id="product-{{ forloop.index | plus:paginate.current_offset }}">
 
           {% comment %}
             Link to your product with the 'within: collection' filter for the link to be aware of the collection.
@@ -101,15 +82,21 @@
                 <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.featured_image.alt | escape }}" class="grid__image">
               </a>
             </div>
-            <div class="grid__item large--four-fifths large--display-table-cell medium--two-thirds">
+            <div class="grid__item large--four-fifths large--display-table-cell medium--two-thirds grid-list">
               <div class="grid">
                 <div class="grid__item large--three-quarters medium--two-thirds">
                   <p class="h6">{{ product.title }}</p>
+                  <p class="sku">{{ product.variants.first.sku }}</p>
+
+                    {% include  'product-suitable-makes' %}
+
                   <div class="rte">
-                    <p>{{ product.content | strip_html | truncatewords: 30 }}</p>
+                    {% comment %}                    
+                      <p>{{ product.content | strip_html | truncatewords: 30 }}</p>
+                    {% endcomment %}
                   </div>
                 </div>
-                <div class="grid__item large--one-quarter medium--one-third">
+                <div class="grid__item large--one-quarter medium--one-third larger-text">
                   {% comment %}
                     You can show a leading 'from' or 'up to' by checking 'product.price_varies'
                     if your variants have different prices.
@@ -153,12 +140,10 @@
 
     </div>
 
-    {% if paginate.pages > 1 %}
+     {% if paginate.next %}
       <hr>
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-      </div>
-    {% endif %}
+      <div class="more">&darr; <a id="NextPageLinkSelector" href="{{ paginate.next.url }}">&nbsp; &nbsp; Keep Scrolling to Load More</a></div>        
+     {% endif %}
 
   </div>
 
@@ -166,3 +151,66 @@
 </div>
 
 {% endpaginate %}
+
+<script>
+  /* Product Tag Filters - Good for any number of filters on any type of collection page.
+     Give you product tag filter select element a class of coll-filter.
+     Give your collection select a class of coll-picker.
+     Brought to you by Caroline Schnapp. */
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+  jQuery('.coll-picker').change(function() {
+    if (jQuery(this).val()) {
+      location.href = '/collections/' + jQuery(this).val();
+    }
+    else {
+      location.href = '/collections/all';
+    }
+  });
+  jQuery(document).ready(function() {
+     console.log('window loaded');
+    if (jQuery('#make-filter').val()){
+      console.log('has value');
+      $('#model-filter').fadeIn(200);
+    } else {
+      console.log('does not have value');
+      $('#model-filter').fadeOut(200);
+    }
+  });    
+  var collFilters = jQuery('.coll-filter');
+  collFilters.change(function() {
+    delete Shopify.queryParams.page;
+    var newTags = [];
+    collFilters.each(function() {
+      if (jQuery(this).val()) {
+        newTags.push(jQuery(this).val());
+      }
+    });
+    {% if collection.handle %}
+    var newURL = '/collections/{{ collection.handle }}';
+    if (newTags.length) {
+      newURL += '/' + newTags.join('+');
+    }
+    var search = jQuery.param(Shopify.queryParams);
+    if (search.length) {
+      newURL += '?' + search;
+    }
+    location.href = newURL;
+    {% else %}
+    if (newTags.length) {
+      Shopify.queryParams.constraint = newTags.join('+');
+    }
+    else {
+      delete Shopify.queryParams.constraint;
+    }
+    location.search = jQuery.param(Shopify.queryParams);
+    {% endif %}
+  });
+</script>

@@ -57,41 +57,7 @@ each other properly at each breakpoint.
         {% assign number_of_links = number_of_links | plus: 1 %}
  
         <div class="grid__item {{ collection_item_width }} text-left flex wrap half-pad">
-            <div class="grey card flex wrap">
-              <div class="grid-uniform">
-                {% comment %}
-                  Use capture to put the collection title in a variable that is used in liquid filters
-                {% endcomment %}
-                {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
-
-                <div class="grid__item {{ collection_item_width }} text-left higher">
-                  <H2 class="upper">
-                    <a  class="word_split" href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">{{ collection.title }}</a>
-                  </H2>
-                  <p>
-                    {{ collection.description | strip_html | truncatewords: 8 }}
-                  </p>
-
-                </div>
-
-                <div class="grid__item {{ collection_item_width }} text-left">
-                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}" class="grid__image">
-                    {% if collection.image %}
-                      {{ collection.image.src | img_url: 'large' | img_tag: collection_title }}
-                    {% else %}
-                      {{ collection.products.first.featured_image | img_url: 'large' | img_tag: collection_title }}
-                    {% endif %}
-                  </a>
-                </div>
-
-                  <a href="{{ product.url | within: collection }}" class="product-hover--btn">
-                    <span class="input-group-btn">
-                        <div class="btn btn--full arrow-after">SHOP NOW &nbsp; &nbsp;
-                        <i class="ion-ios-arrow-forward"></i></div>
-                    </span>
-                  </a>
-              </div>
-            </div>
+          {% include 'card' %}
         </div>
     
     
@@ -138,7 +104,7 @@ each other properly at each breakpoint.
  
         <div class="grid__item {{ collection_item_width }} text-left flex wrap half-pad">
             <div class="grey card flex wrap">
-              <div class="grid-uniform">
+              <div class="grid-uniform" style="max-width:100%">
                 {% comment %}
                   Use capture to put the collection title in a variable that is used in liquid filters
                 {% endcomment %}

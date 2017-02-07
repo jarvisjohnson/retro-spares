@@ -1,13 +1,16 @@
 <!-- /snippets/sidebar-menu.liquid -->
 {% comment %}
 
-  Side nav that shows up on all page on the left hand side and lists the Car Makes / Product Types
+  Side nav that shows up on all page on the left hand side and lists the collections as a menu
 
 {% endcomment %}
 
+{% comment %}
+  List of the Collections
+{% endcomment %}
 <nav role="navigation" class="grey sidebar-nav" id="sidebar-nav">
 	<ul class="grey sidebar-links" id="accordion">
-		<li class="has-dropdown categorytitle" style="margin: -5px 0 5px;">
+		<li class="has-dropdown" style="margin: -5px 0 5px;">
 		Browse By:
 		</li>
 
@@ -60,38 +63,3 @@
 </nav>
 
 
-
-<nav role="navigation" class="grey sidebar-nav" id="sidebar-nav">
- <ul class="grey sidebar-links">
-   <li class="has-dropdown categorytitle" style="margin: -5px 0 5px;">
-		All Categories:
-		</li>
-
-	        {% for child_link in linklists[child_list_handle].links %}
-	        {% assign grand_child_list_handle = child_link.title | handle %}
-	       	{% comment %}
-	        {% if linklists[grand_child_list_handle] and linklists[grand_child_list_handle].links.size > 0 %}
-	        <li class="">
-	          {{ child_link.title | link_to: child_link.url }}
-	          <ul>
-	            {% for grand_child_link in linklists[grand_child_list_handle].links %}
-	            <li>
-	              {{ grand_child_link.title | link_to: grand_child_link.url }}
-	            </li>
-	            {% endfor %}
-	          </ul>
-	        </li>
-	        {% else %}
-	        <li>
-	          {{ child_link.title | link_to: child_link.url }}
-	        </li>
-	        {% endif %}
-	        {% endcomment %}
-	        <li>
-	          {{ child_link.title | link_to: child_link.url }}
-	        </li>	        
-	        {% endfor %}
-	             
-	      </ul>
-
-</nav>

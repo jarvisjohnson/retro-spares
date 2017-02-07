@@ -3,7 +3,7 @@
 <!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-
+<script src='//d1liekpayvooaz.cloudfront.net/apps/customizery/customizery.js?shop={{shop.permanent_domain}}'></script>
   <!-- Basic page needs ================================================== -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -28,15 +28,18 @@
   <meta name="theme-color" content="{{ settings.color_primary }}">
 
   <!-- CSS ================================================== -->
-    {{ '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' | stylesheet_tag }}
+    {{ 'ionicons.min.css' | asset_url | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css' | stylesheet_tag }}
     {{ '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css' | stylesheet_tag }}
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
 
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
   {% include 'oldIE-js' %}
-
+  <!--[if IE]>
+  {{ 'flexibility.js' | asset_url | script_tag }}
+  <![endif]-->
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
   {{ 'modernizr.min.js' | asset_url | script_tag }}
 
@@ -71,7 +74,24 @@
             prevArrow: '<div class="directionNav"><a class="prevNav"><i class="ion-ios-arrow-back"></i><span></span></a></div>'
         });
 
+        // Show or hide the sticky footer button
+        $(window).scroll(function() {
+          if ($(this).scrollTop() > 200) {
+            $('.go-top').fadeIn(200);
+          } else {
+            $('.go-top').fadeOut(200);
+          }
+        });
+        
+        // Animate the scroll to top
+        $('.go-top').click(function(event) {
+          event.preventDefault();
+          
+          $('html, body').animate({scrollTop: 0}, 300);
+        });
+
       });
+
     </script>
 
 </head>
@@ -179,101 +199,12 @@
   <div id="PageContainer" class="is-moved-by-drawer">
 
       <nav class="nav-bar" role="navigation">
-          <div class="wrapper" style="display: table;vertical-align: middle;width: 100%;">
-              <div class="medium-down--hide" style="display: inline-block">
-                  {% comment %}
-                  List out your main-menu linklist (default)
-
-                  More info on linklists:
-                  - http://docs.shopify.com/themes/liquid-variables/linklists
-                  {% endcomment %}
-                  <!-- begin site-nav -->
-                  <ul class="site-nav orange" id="AccessibleNav">
-                      {% for link in linklists.main-menu.links %}
-                          {% comment %}
-                          Create a dropdown menu by naming a linklist the same as a link in the parent nav
-
-                          More info on dropdowns:
-                          - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
-                          {% endcomment %}
-                          {% assign child_list_handle = link.title | handleize %}
-                          {% if linklists[child_list_handle].links != blank %}
-                              <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
-                                  <a href="{{ link.url }}" class="site-nav__link">
-                                      {{ link.title }}
-                                      <span class="icon icon-arrow-down" aria-hidden="true"></span>
-                                  </a>
-                                  <ul class="site-nav__dropdown">
-                                      {% for childlink in linklists[child_list_handle].links %}
-                                          <li{% if childlink.active %} class="site-nav--active"{% endif %}>
-                                              <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
-                                          </li>
-                                      {% endfor %}
-                                  </ul>
-                              </li>
-                          {% else %}
-                              <li {% if link.active %}class="site-nav--active"{% endif %}>
-                                  <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
-                              </li>
-                          {% endif %}
-                      {% endfor %}
-                  </ul>
-                  <!-- //site-nav -->
-              </div>
-              <div class="large--hide medium-down--show">
-                  <div class="grid">
-                      <div class="grid__item one-half">
-                          <div class="site-nav--mobile">
-                              <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer" aria-expanded="false">
-                                  <span class="ion-android-menu" aria-hidden="true"></span>
-                                  <span class="fallback-text">{{ 'layout.navigation.menu' | t }}</span>
-                              </button>
-                          </div>
-                      </div>
-                      <div class="grid__item one-half text-right">
-                          <div class="site-nav--mobile">
-                              <a href="/cart" class="js-drawer-open-right site-nav__link" aria-controls="CartDrawer" aria-expanded="false">
-                  <span class="icon-fallback-text">
-                    <span class="ion-ios-cart-outline" aria-hidden="true">
-                    <span id="CartCount">{{ cart.item_count }}</span>
-                </span>
-                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
-                  </span>
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              {% comment %}
-              If customer accounts are enabled, provide login and create account links
-              {% endcomment %}
-              {% if shop.customer_accounts_enabled %}
-              <div class="login__main medium-down--hide" style="display: table-cell;">
-                      <i class="ion-ios-contact-outline user-icon"></i>
-                  {% if customer %}
-                      {% if customer.first_name != blank %}
-                          {% capture first_name %}<a href="/account">
-                          {{ customer.first_name }}</a>{% endcapture %}
-                          {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-                      {% else %}
-                          <a href="/account">
-                          {{ 'layout.customer.account' | t }}</a>
-                      {% endif %}
-                      | {{ 'layout.customer.log_out' | t | customer_logout_link }}
-                  {% else %}
-                      {{ 'layout.customer.log_in' | t | customer_login_link }}
-                      | {{ 'layout.customer.create_account' | t | customer_register_link }}
-                  {% endif %}
-              </div>
-              {% endif %}
-          </div>
-      </nav>
-
-      <header class="site-header" role="banner">
-        <div class="wrapper">
-
+         
+       
           <div class="grid--full grid--table">
-            <div class="grid__item large--one-third" style="position: relative">
+             <div class="wrapper" style="display: table;vertical-align: middle;width: 100%;">
+       
+            <div class="grid__item large--one-half" style="position: relative">
               {% comment %}
               Use the uploaded logo from theme settings if enabled.
               Site name gets precedence with H1 tag on homepage, div on other pages.
@@ -296,18 +227,89 @@
             </div>
             {% endif %}
           </div>
+           <div class="grid__item large--one-half large--text-right medium-down--hide flex v-center autocableaus">
+            <div>
+            <img id="vintageairlogo" src="//cdn.shopify.com/s/files/1/1318/6829/t/3/assets/homepage_carousel_image_1.jpg?3826380930737930877" alt="">
+            </div>
+            <div>
+            <img id="autocableslogo"src="//cdn.shopify.com/s/files/1/1318/6829/files/Auto-Cables-Australia.jpg?16432292021694601636" alt="">
+            </div>
+        
+
+          </div>
+          </div>
+  
+              <div class="large--hide medium-down--show">
+                  <div class="grid">
+                      <div class="grid__item one-half">
+                          <div class="site-nav--mobile">
+                              <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer" aria-expanded="false">
+                                  <span class="ion-android-menu" aria-hidden="true"></span>
+                                  <span class="fallback-text">{{ 'layout.navigation.menu' | t }}</span>
+                              </button>
+                          </div>
+                      </div>
+                      <div class="grid__item one-half text-right">
+                          <div class="site-nav--mobile">
+                              <a href="/cart" class="js-drawer-open-right site-nav__link" aria-controls="CartDrawer" aria-expanded="false">
+                  <span class="icon-fallback-text">
+                    <span class="ion-ios-cart-outline" aria-hidden="true">
+                    <span id="CartCount">{{ cart.item_count }}</span>
+                </span>
+                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                  </span>
+                          
+                              </a>
+                          </div>
+                      </div> 
+                  </div>
+              </div>
+        
+           
+      </nav>
+
+      <header class="site-header" role="banner">
+        <div class="wrapper">
+
+          <div class="grid--full grid--table">
+            <div class="wrapper" style="display: table;vertical-align: middle;width: 100%;">
+          
+             {% comment %}
+              If customer accounts are enabled, provide login and create account links
+              {% endcomment %}
+              {% if shop.customer_accounts_enabled %}
+              <div class="login__main medium-down--hide" style="display: table-cell;">
+                      <i class="ion-ios-contact-outline user-icon"></i>
+                  {% if customer %}
+                      {% if customer.first_name != blank %}
+                          {% capture first_name %}<a href="/account">
+                          {{ customer.first_name }}</a>{% endcapture %}
+                          {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                      {% else %}
+                          <a href="/account">
+                          {{ 'layout.customer.account' | t }}</a>
+                      {% endif %}
+                      | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                  {% else %}
+                      {{ 'layout.customer.log_in' | t | customer_login_link }}
+                      | {{ 'layout.customer.create_account' | t | customer_register_link }}
+                  {% endif %}
+              </div>
+              {% endif %}
+           
           <div class="grid__item large--one-quarter large--text-center medium-down--hide flex v-center">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
+            <a href="https://goo.gl/maps/4q7jECyxaQu" target="_blank" class="flex v-center">            
               <i class="ion-ios-location-outline header-icon"></i>
               {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
              </a> 
           </div>
           <div class="grid__item large--one-quarter large--text-center medium-down--hide flex v-center">
-            <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
-              <i class="ion-ios-telephone-outline header-icon"></i>          
+            <a href="tel:{{ shop.phone }}" class="flex v-center">          
+              <i class="ion-ios-telephone-outline header-icon" style="transform: rotate(45deg)"></i>          
               {{ shop.phone }} 
             </a>
           </div>
+          
           <div class="grid__item large--one-sixth large--text-right medium-down--hide flex v-center">
 
 
@@ -327,12 +329,15 @@
                 
               </a>
             </div>
+        
 
           </div>
         </div>
 
     </div>
-  </header>
+        
+        
+          </header>
 
   <div class="search-header" role="banner">
       <div class="wrapper">
@@ -412,7 +417,6 @@
       {% else %}
       {% endif %}
     </main>
-
     <!-- begin site-footer -->
     <footer class="site-footer small--text-center" role="contentinfo">
       <!-- begin info-text -->
@@ -582,6 +586,18 @@
                 {% endcomment %}
                 <!-- begin site-nav -->
                 <ul class="footer-nav orange">
+                                          
+        <li>
+          <a title="Refund policy" data-modal="policy-23222723" data-close-text="Close" href="https://checkout.shopify.com/13186829/policies/23222723.html">Refund policy</a>
+        </li>
+        <li>
+          <a title="Privacy policy" data-modal="policy-23222787" data-close-text="Close" href="https://checkout.shopify.com/13186829/policies/23222787.html">Privacy policy</a>
+        </li>
+        <li>
+          <a title="Terms of service" data-modal="policy-23222851" data-close-text="Close" href="https://checkout.shopify.com/13186829/policies/23222851.html">Terms of service</a>
+        </li>
+
+                                             
                     {% for link in linklists.footer-why-buy-menu.links %}
                         {% comment %}
                         Create a dropdown menu by naming a linklist the same as a link in the parent nav
@@ -602,6 +618,7 @@
                                             <a href="{{ childlink.url }}" >{{ childlink.title | escape }}</a>
                                         </li>
                                     {% endfor %}
+                                                                         
                                 </ul>
                             </li>
                         {% else %}
@@ -621,6 +638,10 @@
                 {% endcomment %}
                 <!-- begin site-nav -->
                 <ul class="footer-nav orange">
+                                             <li>
+                      <a href="mailto:info@retrospares.com.au" title="Email">
+                       info@retrospares.com.au
+                      </a>
                     {% for link in linklists.footer-why-buy-menu.links %}
                         {% comment %}
                         Create a dropdown menu by naming a linklist the same as a link in the parent nav
@@ -640,6 +661,7 @@
                                         <li{% if childlink.active %} class="site-nav--active"{% endif %}>
                                             <a href="{{ childlink.url }}" >{{ childlink.title | escape }}</a>
                                         </li>
+                                                                         
                                     {% endfor %}
                                 </ul>
                             </li>
@@ -647,6 +669,7 @@
                             <li {% if link.active %}class="site-nav--active"{% endif %}>
                                 <a href="{{ link.url }}">{{ link.title }}</a>
                             </li>
+                                                        
                         {% endif %}
                     {% endfor %}
             </div>            
@@ -709,14 +732,14 @@
               {% endif %}
             </div>
             <div class="grid__item large--one-quarter large--text-center medium--one-half flex v-center med-pad">
-              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">            
+              <a href="https://goo.gl/maps/4q7jECyxaQu" target="_blank" class="lex v-center">            
                 <i class="ion-ios-location-outline header-icon"></i>
                 {{ shop.address.street }}, {{ shop.address.city }} VIC {{ shop.address.zip }}
                </a> 
             </div>
             <div class="grid__item large--one-quarter large--text-center medium--one-half flex v-center med-pad">
-              <a href="/cart" class="site-header__cart-toggle js-drawer-open-right flex v-center" aria-controls="CartDrawer" aria-expanded="false">          
-                <i class="ion-ios-telephone-outline header-icon"></i>          
+              <a href="tel:{{ shop.phone }}" class="flex v-center">          
+                <i class="ion-ios-telephone-outline header-icon" style="transform: rotate(45deg)"></i>         
                 {{ shop.phone }} 
               </a>
             </div>
@@ -787,6 +810,41 @@
     {% endif %}
   </script>
 
+  {% if template contains 'collection' %}
+    {{ "tricky3.infinitescroll.js" | asset_url | script_tag }}
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var options = {
+          Selectors:{
+            ParentProductsWrapper:'.products-ajax-wrapper',
+            Product:'.product-ajax-wrapper',
+            NextPageLink:'#NextPageLinkSelector'
+          },
+          WaitForImagesToBeLoaded:true, // if true products will be appended after all images have loaded
+          EnableHasherModule:true, // adds hash tags on the window location href for URL bookmarks
+          CallBackOnPageLoad:function(){
+            // removing the loading image
+            $('.loading').remove();
+            $('body').removeClass('ajax-loading');          
+          },
+          CallBackBeforePageLoad:function(){
+            // example showing a loading image
+            // $('.loading').remove();
+            $('body').append('<div class="loading"/>');
+            $('body').addClass('ajax-loading');
+          },
+          CallBack:function(){
+            // removing the loading image
+            $('.loading').remove();
+            $('body').removeClass('ajax-loading');
+            $('.more').remove();
+          }
+        };
+        $('.products-ajax-wrapper').TrickyInfiniteScroll(options);
+      });
+    </script>
+  {% endif %}
+
   {% comment %}
     Ajaxify your cart with this plugin.
     Documentation:
@@ -846,6 +904,6 @@
 
 
 
-
+<a href="#" class="go-top">Back to Top</a>
 </body>
 </html>
